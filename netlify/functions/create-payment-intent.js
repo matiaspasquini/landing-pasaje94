@@ -36,7 +36,7 @@ export const handler = async (event) => {
         enabled: true,
       },
       description: `Pedido de ${customerInfo?.name || 'Cliente'}: ${itemsDescription}`,
-      receipt_email: customerInfo?.email, // Stripe enviará recibo automáticamente
+      receipt_email: customerInfo?.email, // Stripe enviará recibo automáticamente (solo en LIVE mode)
       metadata: {
         // Información del cliente
         customer_name: customerInfo?.name || '',
@@ -56,6 +56,10 @@ export const handler = async (event) => {
         timestamp: new Date().toISOString(),
       },
     })
+
+    console.log('✅ Payment Intent created:', paymentIntent.id)
+    console.log('📧 Receipt will be sent to:', customerInfo?.email)
+    console.log('💰 Amount:', amount, 'EUR')
 
     return {
       statusCode: 200,
