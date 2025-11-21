@@ -110,6 +110,7 @@ const StripeCheckout = ({ isOpen, onClose, cart, total, shippingCost = 0 }) => {
             address: checkoutData.address,
             city: checkoutData.city,
             postalCode: checkoutData.postalCode,
+            country: checkoutData.country,
             notes: checkoutData.notes,
           },
         }),

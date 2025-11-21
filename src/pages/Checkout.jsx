@@ -16,17 +16,40 @@ const Checkout = () => {
     address: '',
     city: '',
     postalCode: '',
+    country: 'ES', // País por defecto España
     notes: '',
-    shippingMethod: 'standard', // Nuevo campo para método de envío
+    shippingMethod: 'standard',
   })
 
   const [errors, setErrors] = useState({})
+  const [shippingZone, setShippingZone] = useState('spain') // spain, europe, international
 
-  // Costos de envío
+  // Costos de envío por zona
   const shippingCosts = {
-    standard: 5.00,    // 3-5 días
-    express: 12.00,    // 1-2 días
-    pickup: 0.00,      // Recoger en tienda
+    spain: {
+      standard: 5.00,    // 3-5 días
+      express: 12.00,    // 1-2 días
+      pickup: 0.00,      // Recoger en tienda
+    },
+    europe: {
+      standard: 15.00,   // 5-7 días
+      express: 30.00,    // 2-3 días
+      pickup: null,      // No disponible
+    },
+    international: {
+      standard: 35.00,   // 7-14 días
+      express: 60.00,    // 3-5 días
+      pickup: null,      // No disponible
+    }
+  }
+
+  // Detectar zona de envío según país
+  const detectShippingZone = (country) => {
+    const euCountries = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'SE']
+    
+    if (country === 'ES') return 'spain'
+    if (euCountries.includes(country)) return 'europe'
+    return 'international'
   }
 
   const handleChange = (e) => {
@@ -35,6 +58,18 @@ const Checkout = () => {
       ...prev,
       [name]: value,
     }))
+    
+    // Detectar zona de envío cuando cambia el país
+    if (name === 'country') {
+      const newZone = detectShippingZone(value)
+      setShippingZone(newZone)
+      
+      // Si no es España, resetear a standard (pickup no disponible)
+      if (newZone !== 'spain' && formData.shippingMethod === 'pickup') {
+        setFormData(prev => ({ ...prev, shippingMethod: 'standard' }))
+      }
+    }
+    
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
@@ -57,6 +92,7 @@ const Checkout = () => {
     if (!formData.address.trim()) newErrors.address = 'Address is required'
     if (!formData.city.trim()) newErrors.city = 'City is required'
     if (!formData.postalCode.trim()) newErrors.postalCode = 'Postal code is required'
+    if (!formData.country.trim()) newErrors.country = 'Country is required'
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -67,7 +103,8 @@ const Checkout = () => {
 
     if (!validateForm()) return
 
-    const shippingCost = shippingCosts[formData.shippingMethod]
+    const currentShippingCosts = shippingCosts[shippingZone]
+    const shippingCost = currentShippingCosts[formData.shippingMethod]
     const subtotal = getCartTotal()
     const total = subtotal + shippingCost
 
@@ -242,6 +279,75 @@ const Checkout = () => {
 
                     <div>
                       <label className="block text-sm tracking-wider mb-2">
+                        COUNTRY *
+                      </label>
+                      <select
+                        name="country"
+                        value={formData.country}
+                        onChange={handleChange}
+                        className={`w-full border ${
+                          errors.country ? 'border-red-500' : 'border-black'
+                        } p-3 focus:outline-none focus:ring-1 focus:ring-black bg-white`}
+                      >
+                        <option value="ES">España</option>
+                        <optgroup label="European Union">
+                          <option value="AT">Austria</option>
+                          <option value="BE">Belgium</option>
+                          <option value="BG">Bulgaria</option>
+                          <option value="HR">Croatia</option>
+                          <option value="CY">Cyprus</option>
+                          <option value="CZ">Czech Republic</option>
+                          <option value="DK">Denmark</option>
+                          <option value="EE">Estonia</option>
+                          <option value="FI">Finland</option>
+                          <option value="FR">France</option>
+                          <option value="DE">Germany</option>
+                          <option value="GR">Greece</option>
+                          <option value="HU">Hungary</option>
+                          <option value="IE">Ireland</option>
+                          <option value="IT">Italy</option>
+                          <option value="LV">Latvia</option>
+                          <option value="LT">Lithuania</option>
+                          <option value="LU">Luxembourg</option>
+                          <option value="MT">Malta</option>
+                          <option value="NL">Netherlands</option>
+                          <option value="PL">Poland</option>
+                          <option value="PT">Portugal</option>
+                          <option value="RO">Romania</option>
+                          <option value="SK">Slovakia</option>
+                          <option value="SI">Slovenia</option>
+                          <option value="SE">Sweden</option>
+                        </optgroup>
+                        <optgroup label="International">
+                          <option value="US">United States</option>
+                          <option value="GB">United Kingdom</option>
+                          <option value="AR">Argentina</option>
+                          <option value="BR">Brazil</option>
+                          <option value="CA">Canada</option>
+                          <option value="CL">Chile</option>
+                          <option value="MX">Mexico</option>
+                          <option value="OTHER">Other</option>
+                        </optgroup>
+                      </select>
+                      {errors.country && (
+                        <p className="text-red-500 text-xs mt-1">{errors.country}</p>
+                      )}
+                      
+                      {/* Mensaje de zona de envío */}
+                      {shippingZone === 'europe' && (
+                        <p className="text-xs text-blue-600 mt-2">
+                          📦 European Union shipping available
+                        </p>
+                      )}
+                      {shippingZone === 'international' && (
+                        <p className="text-xs text-orange-600 mt-2">
+                          🌍 International shipping - longer delivery times and higher costs apply
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm tracking-wider mb-2">
                         ADDITIONAL NOTES
                       </label>
                       <textarea
@@ -275,10 +381,14 @@ const Checkout = () => {
                         />
                         <div>
                           <p className="font-medium">Standard Shipping</p>
-                          <p className="text-sm text-gray-600">3-5 business days</p>
+                          <p className="text-sm text-gray-600">
+                            {shippingZone === 'spain' && '3-5 business days'}
+                            {shippingZone === 'europe' && '5-7 business days'}
+                            {shippingZone === 'international' && '7-14 business days'}
+                          </p>
                         </div>
                       </div>
-                      <span className="font-medium">€5.00</span>
+                      <span className="font-medium">€{shippingCosts[shippingZone].standard.toFixed(2)}</span>
                     </label>
 
                     <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
@@ -293,29 +403,35 @@ const Checkout = () => {
                         />
                         <div>
                           <p className="font-medium">Express Shipping</p>
-                          <p className="text-sm text-gray-600">1-2 business days</p>
+                          <p className="text-sm text-gray-600">
+                            {shippingZone === 'spain' && '1-2 business days'}
+                            {shippingZone === 'europe' && '2-3 business days'}
+                            {shippingZone === 'international' && '3-5 business days'}
+                          </p>
                         </div>
                       </div>
-                      <span className="font-medium">€12.00</span>
+                      <span className="font-medium">€{shippingCosts[shippingZone].express.toFixed(2)}</span>
                     </label>
 
-                    <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          name="shippingMethod"
-                          value="pickup"
-                          checked={formData.shippingMethod === 'pickup'}
-                          onChange={handleChange}
-                          className="mr-3"
-                        />
-                        <div>
-                          <p className="font-medium">Pick up at Store</p>
-                          <p className="text-sm text-gray-600">Pasaje 94, Valencia</p>
+                    {shippingZone === 'spain' && (
+                      <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
+                        <div className="flex items-center">
+                          <input
+                            type="radio"
+                            name="shippingMethod"
+                            value="pickup"
+                            checked={formData.shippingMethod === 'pickup'}
+                            onChange={handleChange}
+                            className="mr-3"
+                          />
+                          <div>
+                            <p className="font-medium">Pick up at Store</p>
+                            <p className="text-sm text-gray-600">Pasaje 94, Valencia</p>
+                          </div>
                         </div>
-                      </div>
-                      <span className="font-medium">FREE</span>
-                    </label>
+                        <span className="font-medium">FREE</span>
+                      </label>
+                    )}
                   </div>
                 </div>
 
@@ -351,16 +467,16 @@ const Checkout = () => {
                     <span>€{getCartTotal().toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Shipping</span>
+                    <span>Shipping ({shippingZone === 'spain' ? 'Spain' : shippingZone === 'europe' ? 'EU' : 'International'})</span>
                     <span>
                       {formData.shippingMethod === 'pickup' 
                         ? 'FREE' 
-                        : `€${shippingCosts[formData.shippingMethod].toFixed(2)}`}
+                        : `€${shippingCosts[shippingZone][formData.shippingMethod].toFixed(2)}`}
                     </span>
                   </div>
                   <div className="flex justify-between text-lg font-medium pt-2 border-t border-gray-300">
                     <span className="tracking-wider">TOTAL</span>
-                    <span>€{(getCartTotal() + shippingCosts[formData.shippingMethod]).toFixed(2)}</span>
+                    <span>€{(getCartTotal() + shippingCosts[shippingZone][formData.shippingMethod]).toFixed(2)}</span>
                   </div>
                   <p className="text-xs text-gray-600 pt-2">
                     Secure payment powered by Stripe
@@ -379,8 +495,8 @@ const Checkout = () => {
             isOpen={showStripeCheckout}
             onClose={() => setShowStripeCheckout(false)}
             cart={cartItems}
-            total={getCartTotal() + shippingCosts[formData.shippingMethod]}
-            shippingCost={shippingCosts[formData.shippingMethod]}
+            total={getCartTotal() + shippingCosts[shippingZone][formData.shippingMethod]}
+            shippingCost={shippingCosts[shippingZone][formData.shippingMethod]}
           />
         )}
       </AnimatePresence>

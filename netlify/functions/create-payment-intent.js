@@ -45,6 +45,7 @@ export const handler = async (event) => {
         customer_address: customerInfo?.address || '',
         customer_city: customerInfo?.city || '',
         customer_postal_code: customerInfo?.postalCode || '',
+        customer_country: customerInfo?.country || '',
         customer_notes: customerInfo?.notes || '',
         // Información de envío
         shipping_method: shippingMethod,
