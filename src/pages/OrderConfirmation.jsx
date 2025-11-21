@@ -6,33 +6,63 @@ const OrderConfirmation = () => {
   const location = useLocation()
   const { clearCart } = useCart()
   const [orderData, setOrderData] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Intentar obtener datos del pedido desde diferentes fuentes
-    const stateOrderData = location.state?.orderData
-    const sessionOrderData = sessionStorage.getItem('orderData')
-    
-    if (stateOrderData) {
-      setOrderData(stateOrderData)
-    } else if (sessionOrderData) {
-      setOrderData(JSON.parse(sessionOrderData))
+    const loadOrderData = () => {
+      // Verificar si venimos de Stripe (parámetros en la URL)
+      const searchParams = new URLSearchParams(location.search)
+      const paymentIntent = searchParams.get('payment_intent')
+      const redirectStatus = searchParams.get('redirect_status')
+
+      // Si venimos de Stripe con pago exitoso
+      if (paymentIntent && redirectStatus === 'succeeded') {
+        // Buscar datos del pedido en sessionStorage
+        const sessionOrderData = sessionStorage.getItem('orderData')
+        
+        if (sessionOrderData) {
+          setOrderData(JSON.parse(sessionOrderData))
+          clearCart()
+          // Limpiar datos después de cargarlos
+          sessionStorage.removeItem('orderData')
+          localStorage.removeItem('checkoutData')
+        }
+      } else {
+        // Intentar obtener datos del pedido desde location.state (fallback)
+        const stateOrderData = location.state?.orderData
+        if (stateOrderData) {
+          setOrderData(stateOrderData)
+          clearCart()
+        }
+      }
+      
+      setIsLoading(false)
     }
 
-    // Limpiar el carrito después de una compra exitosa
-    if (stateOrderData || sessionOrderData) {
-      clearCart()
-      // Limpiar sessionStorage después de usar los datos
-      sessionStorage.removeItem('orderData')
-      localStorage.removeItem('checkoutData')
-    }
-  }, [location.state, clearCart])
+    loadOrderData()
+  }, [location.search, location.state, clearCart])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-32 px-6 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+          <p className="text-sm tracking-wider">Loading order details...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!orderData) {
     return (
       <div className="min-h-screen pt-32 px-6 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-3xl tracking-tighter font-light mb-4">No order found</h2>
-          <Link to="/space" className="text-sm tracking-wider hover:opacity-60">
+          <p className="text-sm mb-6 text-gray-600">
+            No pudimos encontrar los detalles de tu pedido, pero si realizaste un pago, 
+            recibirás un email de confirmación.
+          </p>
+          <Link to="/space" className="text-sm tracking-wider hover:opacity-60 border-b border-black pb-1">
             Continue Shopping
           </Link>
         </div>
