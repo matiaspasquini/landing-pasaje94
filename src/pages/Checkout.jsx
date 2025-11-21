@@ -71,18 +71,23 @@ const Checkout = () => {
     const subtotal = getCartTotal()
     const total = subtotal + shippingCost
 
-    // Guardar datos de envío en localStorage para usarlos en Stripe
-    localStorage.setItem('checkoutData', JSON.stringify(formData))
-    
-    // Guardar también el resumen del pedido completo en sessionStorage
-    sessionStorage.setItem('orderData', JSON.stringify({
+    const orderDataToSave = {
       ...formData,
       cartItems: cartItems,
       subtotal: subtotal,
       shippingCost: shippingCost,
       total: total,
       date: new Date().toISOString(),
-    }))
+    }
+
+    // Guardar datos de envío en localStorage para usarlos en Stripe
+    localStorage.setItem('checkoutData', JSON.stringify(formData))
+    
+    // Guardar el pedido completo en AMBOS lugares para mayor seguridad
+    sessionStorage.setItem('orderData', JSON.stringify(orderDataToSave))
+    localStorage.setItem('orderData', JSON.stringify(orderDataToSave))
+    
+    console.log('💾 Order data saved:', orderDataToSave)
     
     // Mostrar modal de Stripe
     setShowStripeCheckout(true)
