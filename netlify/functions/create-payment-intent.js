@@ -13,7 +13,7 @@ export const handler = async (event) => {
   }
 
   try {
-    const { amount, currency, items, customerInfo } = JSON.parse(event.body)
+    const { amount, currency, items, customerInfo, shippingCost = 0, shippingMethod = 'standard' } = JSON.parse(event.body)
 
     // Validación básica
     if (!amount || amount <= 0) {
@@ -36,6 +36,7 @@ export const handler = async (event) => {
         enabled: true,
       },
       description: `Pedido de ${customerInfo?.name || 'Cliente'}: ${itemsDescription}`,
+      receipt_email: customerInfo?.email, // Stripe enviará recibo automáticamente
       metadata: {
         // Información del cliente
         customer_name: customerInfo?.name || '',
@@ -44,6 +45,10 @@ export const handler = async (event) => {
         customer_address: customerInfo?.address || '',
         customer_city: customerInfo?.city || '',
         customer_postal_code: customerInfo?.postalCode || '',
+        customer_notes: customerInfo?.notes || '',
+        // Información de envío
+        shipping_method: shippingMethod,
+        shipping_cost: shippingCost.toFixed(2),
         // Información de productos (Stripe metadata acepta strings)
         items: JSON.stringify(items),
         items_count: items.length.toString(),

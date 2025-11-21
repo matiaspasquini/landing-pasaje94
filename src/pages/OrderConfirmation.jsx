@@ -140,9 +140,19 @@ const OrderConfirmation = () => {
                 ))}
               </div>
               
-              <div className="border-t border-gray-200 mt-4 pt-4 flex justify-between text-lg">
-                <span className="tracking-wider">TOTAL</span>
-                <span className="font-light">€{orderData.total.toFixed(2)}</span>
+              <div className="border-t border-gray-200 mt-4 pt-4 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>Subtotal</span>
+                  <span>€{orderData.subtotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span>Shipping ({orderData.shippingMethod})</span>
+                  <span>{orderData.shippingCost === 0 ? 'FREE' : `€${orderData.shippingCost.toFixed(2)}`}</span>
+                </div>
+                <div className="flex justify-between text-lg font-medium pt-2 border-t">
+                  <span className="tracking-wider">TOTAL</span>
+                  <span>€{orderData.total.toFixed(2)}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -151,10 +161,16 @@ const OrderConfirmation = () => {
           <div className="bg-gray-50 p-6 mb-8">
             <h3 className="text-sm tracking-wider mb-4">WHAT'S NEXT?</h3>
             <ol className="text-left space-y-2 text-sm max-w-md mx-auto">
-              <li>1. Recibirás un email de confirmación con los detalles de tu compra</li>
-              <li>2. Prepararemos tu pedido para el envío</li>
-              <li>3. Te enviaremos un número de seguimiento cuando se envíe</li>
-              <li>4. Tu pedido llegará en 3-5 días hábiles</li>
+              <li>1. Recibirás un email de Stripe con el recibo de tu compra</li>
+              <li>2. {orderData.shippingMethod === 'pickup' 
+                  ? 'Puedes recoger tu pedido en Pasaje 94, Valencia' 
+                  : 'Prepararemos tu pedido para el envío'}</li>
+              <li>3. {orderData.shippingMethod !== 'pickup' && 'Te enviaremos un número de seguimiento cuando se envíe'}</li>
+              <li>4. {orderData.shippingMethod === 'express' 
+                  ? 'Tu pedido llegará en 1-2 días hábiles' 
+                  : orderData.shippingMethod === 'standard'
+                  ? 'Tu pedido llegará en 3-5 días hábiles'
+                  : 'Te esperamos en la tienda'}</li>
             </ol>
           </div>
 

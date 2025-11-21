@@ -17,9 +17,17 @@ const Checkout = () => {
     city: '',
     postalCode: '',
     notes: '',
+    shippingMethod: 'standard', // Nuevo campo para método de envío
   })
 
   const [errors, setErrors] = useState({})
+
+  // Costos de envío
+  const shippingCosts = {
+    standard: 5.00,    // 3-5 días
+    express: 12.00,    // 1-2 días
+    pickup: 0.00,      // Recoger en tienda
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -59,6 +67,10 @@ const Checkout = () => {
 
     if (!validateForm()) return
 
+    const shippingCost = shippingCosts[formData.shippingMethod]
+    const subtotal = getCartTotal()
+    const total = subtotal + shippingCost
+
     // Guardar datos de envío en localStorage para usarlos en Stripe
     localStorage.setItem('checkoutData', JSON.stringify(formData))
     
@@ -66,7 +78,9 @@ const Checkout = () => {
     sessionStorage.setItem('orderData', JSON.stringify({
       ...formData,
       cartItems: cartItems,
-      total: getCartTotal(),
+      subtotal: subtotal,
+      shippingCost: shippingCost,
+      total: total,
       date: new Date().toISOString(),
     }))
     
@@ -237,6 +251,69 @@ const Checkout = () => {
                   </div>
                 </div>
 
+                {/* Shipping Method */}
+                <div>
+                  <h2 className="text-2xl tracking-tighter font-light mb-6">
+                    Shipping Method
+                  </h2>
+                  
+                  <div className="space-y-3">
+                    <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="shippingMethod"
+                          value="standard"
+                          checked={formData.shippingMethod === 'standard'}
+                          onChange={handleChange}
+                          className="mr-3"
+                        />
+                        <div>
+                          <p className="font-medium">Standard Shipping</p>
+                          <p className="text-sm text-gray-600">3-5 business days</p>
+                        </div>
+                      </div>
+                      <span className="font-medium">€5.00</span>
+                    </label>
+
+                    <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="shippingMethod"
+                          value="express"
+                          checked={formData.shippingMethod === 'express'}
+                          onChange={handleChange}
+                          className="mr-3"
+                        />
+                        <div>
+                          <p className="font-medium">Express Shipping</p>
+                          <p className="text-sm text-gray-600">1-2 business days</p>
+                        </div>
+                      </div>
+                      <span className="font-medium">€12.00</span>
+                    </label>
+
+                    <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="shippingMethod"
+                          value="pickup"
+                          checked={formData.shippingMethod === 'pickup'}
+                          onChange={handleChange}
+                          className="mr-3"
+                        />
+                        <div>
+                          <p className="font-medium">Pick up at Store</p>
+                          <p className="text-sm text-gray-600">Pasaje 94, Valencia</p>
+                        </div>
+                      </div>
+                      <span className="font-medium">FREE</span>
+                    </label>
+                  </div>
+                </div>
+
                 <button
                   type="submit"
                   className="w-full py-3 bg-black text-white hover:bg-gray-800 transition-colors text-sm tracking-wider"
@@ -263,12 +340,24 @@ const Checkout = () => {
                   ))}
                 </div>
 
-                <div className="border-t border-gray-300 pt-4">
-                  <div className="flex justify-between text-lg mb-4">
-                    <span className="tracking-wider">TOTAL</span>
-                    <span className="font-light">€{getCartTotal().toFixed(2)}</span>
+                <div className="border-t border-gray-300 pt-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Subtotal</span>
+                    <span>€{getCartTotal().toFixed(2)}</span>
                   </div>
-                  <p className="text-xs text-gray-600">
+                  <div className="flex justify-between text-sm">
+                    <span>Shipping</span>
+                    <span>
+                      {formData.shippingMethod === 'pickup' 
+                        ? 'FREE' 
+                        : `€${shippingCosts[formData.shippingMethod].toFixed(2)}`}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-lg font-medium pt-2 border-t border-gray-300">
+                    <span className="tracking-wider">TOTAL</span>
+                    <span>€{(getCartTotal() + shippingCosts[formData.shippingMethod]).toFixed(2)}</span>
+                  </div>
+                  <p className="text-xs text-gray-600 pt-2">
                     Secure payment powered by Stripe
                   </p>
                 </div>
@@ -285,7 +374,8 @@ const Checkout = () => {
             isOpen={showStripeCheckout}
             onClose={() => setShowStripeCheckout(false)}
             cart={cartItems}
-            total={getCartTotal()}
+            total={getCartTotal() + shippingCosts[formData.shippingMethod]}
+            shippingCost={shippingCosts[formData.shippingMethod]}
           />
         )}
       </AnimatePresence>

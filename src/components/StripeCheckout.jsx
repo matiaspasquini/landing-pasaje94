@@ -74,7 +74,7 @@ const CheckoutForm = ({ onSuccess, onCancel, total }) => {
   )
 }
 
-const StripeCheckout = ({ isOpen, onClose, cart, total }) => {
+const StripeCheckout = ({ isOpen, onClose, cart, total, shippingCost = 0 }) => {
   const [clientSecret, setClientSecret] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -101,6 +101,8 @@ const StripeCheckout = ({ isOpen, onClose, cart, total }) => {
             quantity: item.quantity,
             price: item.price,
           })),
+          shippingCost: shippingCost,
+          shippingMethod: checkoutData.shippingMethod || 'standard',
           customerInfo: {
             name: checkoutData.name,
             email: checkoutData.email,
@@ -108,6 +110,7 @@ const StripeCheckout = ({ isOpen, onClose, cart, total }) => {
             address: checkoutData.address,
             city: checkoutData.city,
             postalCode: checkoutData.postalCode,
+            notes: checkoutData.notes,
           },
         }),
       })
