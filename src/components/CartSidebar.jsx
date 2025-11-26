@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '../contexts/CartContext'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const CartSidebar = () => {
+  const { t } = useTranslation()
   const {
     cartItems,
     isCartOpen,
