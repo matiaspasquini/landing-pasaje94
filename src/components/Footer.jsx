@@ -21,7 +21,7 @@ const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-sm tracking-wider mb-4">NAVIGATE</h3>
+            <h3 className="text-sm tracking-wider mb-4">{t('navigate')}</h3>
             <nav className="flex flex-col gap-2">
               <Link to="/about" className="text-sm hover:opacity-60 transition-opacity">
                 About
@@ -43,7 +43,7 @@ const Footer = () => {
 
           {/* Contact & Social */}
           <div>
-            <h3 className="text-sm tracking-wider mb-4">CONNECT</h3>
+            <h3 className="text-sm tracking-wider mb-4">{t('connect')}</h3>
             <div className="flex flex-col gap-2 text-sm">
               <a 
                 href="mailto:info@pasaje94.com"
@@ -74,7 +74,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 pt-6 border-t border-black flex justify-between items-center text-xs">
           <p>© {new Date().getFullYear()} Pasaje 94. Valencia, Spain.</p>
-          <p>Diseño y desarrollo por Blaiz</p>
+          <p>{t('designDevelopment')}</p>
         </div>
       </div>
     </footer>
