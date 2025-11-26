@@ -48,21 +48,42 @@ const Space = () => {
 
   // Función para navegar a un autor específico
   const scrollToDesigner = (designerId) => {
-    const element = document.getElementById(designerId)
-    if (element && containerRef.current) {
-      const container = containerRef.current
-      const elementLeft = element.offsetLeft
-      const containerWidth = container.clientWidth
-      const elementWidth = element.clientWidth
+    console.log('Navegando a:', designerId)
+    
+    // Buscar el elemento después de un pequeño delay
+    setTimeout(() => {
+      const element = document.getElementById(designerId)
+      console.log('Elemento encontrado:', element)
       
-      // Centrar el elemento en el viewport
-      const scrollPosition = elementLeft - (containerWidth / 2) + (elementWidth / 2)
-      
-      container.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      })
-    }
+      if (element && containerRef.current) {
+        const container = containerRef.current
+        const rect = element.getBoundingClientRect()
+        const containerRect = container.getBoundingClientRect()
+        
+        // Calcular la posición de scroll considerando el scroll actual
+        const scrollPosition = container.scrollLeft + rect.left - containerRect.left - (containerRect.width / 2) + (rect.width / 2)
+        
+        console.log('Scrolling to position:', scrollPosition)
+        
+        container.scrollTo({
+          left: Math.max(0, scrollPosition),
+          behavior: 'smooth'
+        })
+      } else {
+        console.log('No se encontró el elemento o container')
+        // Intentar de nuevo si no se encuentra
+        setTimeout(() => {
+          const retryElement = document.getElementById(designerId)
+          if (retryElement && containerRef.current) {
+            retryElement.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'center',
+              inline: 'center'
+            })
+          }
+        }, 500)
+      }
+    }, 200)
   }
 
   // Lista de autores para el índice
@@ -429,10 +450,11 @@ const Space = () => {
         className="overflow-x-auto overflow-y-hidden h-full scrollbar-hide pt-20"
         style={{ scrollSnapType: 'none' }}
       >
-        <div className="flex h-full gap-12 px-12" style={{ width: 'max-content' }}>
+        <div className="flex h-full gap-12 px-6 md:px-12" style={{ width: 'max-content' }}>
           {allItems.map((item, index) => (
             <motion.div
               key={item.id}
+              id={item.id}
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -456,40 +478,40 @@ const Space = () => {
                   </div>
                 </div>
               ) : item.type === 'designers-index' ? (
-                <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
-                  <div className="text-center max-w-6xl">
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-4 md:mb-8">
+                <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center px-4">
+                  <div className="text-center max-w-6xl w-full">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-3 md:mb-6">
                       {item.title}
                     </h1>
-                    <h2 className="text-lg md:text-xl lg:text-2xl tracking-wide font-light mb-12 md:mb-16 italic text-gray-600">
+                    <h2 className="text-base md:text-lg lg:text-xl tracking-wide font-light mb-8 md:mb-12 italic text-gray-600">
                       {item.subtitle}
                     </h2>
                     
                     {/* Grid de diseñadores */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
                       {designers.map((designer, index) => (
                         <motion.button
                           key={designer.id}
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: index * 0.1 }}
-                          whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                          whileHover={{ y: -3, transition: { duration: 0.2 } }}
                           onClick={() => scrollToDesigner(designer.id)}
-                          className="group text-left p-6 md:p-8 border border-gray-200 hover:border-black transition-all duration-300 bg-white hover:shadow-lg"
+                          className="group text-left p-4 sm:p-5 lg:p-6 border border-gray-200 hover:border-black transition-all duration-300 bg-white hover:shadow-lg w-full"
                         >
-                          <div className="mb-4">
-                            <h3 className="text-xl md:text-2xl font-light tracking-tight text-gray-900 group-hover:text-black transition-colors">
+                          <div className="mb-3">
+                            <h3 className="text-base sm:text-lg lg:text-xl font-light tracking-tight text-gray-900 group-hover:text-black transition-colors">
                               {designer.name}
                             </h3>
-                            <div className="w-12 h-px bg-gray-300 group-hover:bg-black transition-colors mt-3"></div>
+                            <div className="w-10 h-px bg-gray-300 group-hover:bg-black transition-colors mt-2"></div>
                           </div>
                           
-                          <p className="text-sm md:text-base text-gray-600 group-hover:text-gray-800 transition-colors leading-relaxed mb-4">
+                          <p className="text-xs sm:text-sm lg:text-base text-gray-600 group-hover:text-gray-800 transition-colors leading-relaxed mb-3">
                             {designer.collection}
                           </p>
                           
                           <div className="text-xs tracking-wider text-gray-500 group-hover:text-gray-700 transition-colors">
-                            VER COLECCIÓN →
+                            {t('viewCollection', 'VER COLECCIÓN')} →
                           </div>
                         </motion.button>
                       ))}
