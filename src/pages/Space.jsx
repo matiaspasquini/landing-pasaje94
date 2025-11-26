@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -42,25 +42,9 @@ import giovImg6 from '../assets/Giov/Pasaje 94 - Giov studio objects.JPG'
 
 const Space = () => {
   const containerRef = useRef(null)
-  const indexRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
   const { t } = useTranslation()
   const { addToCart } = useCart()
-  const [showIndex, setShowIndex] = useState(false)
-
-  // Efecto para cerrar el índice al hacer clic fuera
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (indexRef.current && !indexRef.current.contains(event.target)) {
-        setShowIndex(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   // Función para navegar a un autor específico
   const scrollToDesigner = (designerId) => {
@@ -79,7 +63,6 @@ const Space = () => {
         behavior: 'smooth'
       })
     }
-    setShowIndex(false)
   }
 
   // Lista de autores para el índice
@@ -99,6 +82,14 @@ const Space = () => {
       title: 'Holy days',
       subtitle: t('spaceSubtitle'),
       description: t('spaceDescription')
+    },
+    
+    // Índice de diseñadores
+    {
+      id: 'designers-index',
+      type: 'designers-index',
+      title: t('designersIndexTitle', 'Nuestros Diseñadores'),
+      subtitle: t('designersIndexSubtitle', 'Explora las colecciones de cada artista')
     },
     
     // Intro Bruno Mespulet
@@ -462,39 +453,46 @@ const Space = () => {
                     <p className="text-sm md:text-lg leading-relaxed text-gray-700 max-w-3xl mx-auto mb-8">
                       {item.description}
                     </p>
+                  </div>
+                </div>
+              ) : item.type === 'designers-index' ? (
+                <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
+                  <div className="text-center max-w-6xl">
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-4 md:mb-8">
+                      {item.title}
+                    </h1>
+                    <h2 className="text-lg md:text-xl lg:text-2xl tracking-wide font-light mb-12 md:mb-16 italic text-gray-600">
+                      {item.subtitle}
+                    </h2>
                     
-                    {/* Botón del índice de autores */}
-                    <div ref={indexRef} className="relative">
-                      <button
-                        onClick={() => setShowIndex(!showIndex)}
-                        className="bg-black text-white px-6 py-3 text-sm tracking-wide hover:bg-gray-800 transition-colors"
-                      >
-                        {t('designersIndex')} {showIndex ? '−' : '+'}
-                      </button>
-                      
-                      {/* Dropdown del índice */}
-                      {showIndex && (
-                        <motion.div 
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 shadow-lg z-50 min-w-80"
+                    {/* Grid de diseñadores */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                      {designers.map((designer, index) => (
+                        <motion.button
+                          key={designer.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: index * 0.1 }}
+                          whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                          onClick={() => scrollToDesigner(designer.id)}
+                          className="group text-left p-6 md:p-8 border border-gray-200 hover:border-black transition-all duration-300 bg-white hover:shadow-lg"
                         >
-                          <div className="py-4 px-6">
-                            <h3 className="text-sm tracking-wider text-gray-600 mb-4">SALTAR A:</h3>
-                            {designers.map((designer, index) => (
-                              <button
-                                key={designer.id}
-                                onClick={() => scrollToDesigner(designer.id)}
-                                className="block w-full text-left py-3 px-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
-                              >
-                                <div className="text-sm font-medium text-gray-900">{designer.name}</div>
-                                <div className="text-xs text-gray-500 mt-1">{designer.collection}</div>
-                              </button>
-                            ))}
+                          <div className="mb-4">
+                            <h3 className="text-xl md:text-2xl font-light tracking-tight text-gray-900 group-hover:text-black transition-colors">
+                              {designer.name}
+                            </h3>
+                            <div className="w-12 h-px bg-gray-300 group-hover:bg-black transition-colors mt-3"></div>
                           </div>
-                        </motion.div>
-                      )}
+                          
+                          <p className="text-sm md:text-base text-gray-600 group-hover:text-gray-800 transition-colors leading-relaxed mb-4">
+                            {designer.collection}
+                          </p>
+                          
+                          <div className="text-xs tracking-wider text-gray-500 group-hover:text-gray-700 transition-colors">
+                            VER COLECCIÓN →
+                          </div>
+                        </motion.button>
+                      ))}
                     </div>
                   </div>
                 </div>
