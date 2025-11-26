@@ -407,8 +407,13 @@ const Space = () => {
                 <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
                   <div className="text-center max-w-4xl">
                     <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-tighter font-light mb-6 md:mb-8 relative">
-                      <span className="relative z-10 bg-white px-4">{item.title}</span>
-                      <div className="absolute top-1/2 left-0 right-0 h-px bg-black transform -translate-y-1/2"></div>
+                      <span className="relative">
+                        Holy
+                        <span className="relative inline-block mx-8">
+                          <span className="absolute top-1/2 left-0 right-0 h-px bg-black transform -translate-y-1/2"></span>
+                        </span>
+                        days
+                      </span>
                     </h1>
                     <h2 className="text-lg md:text-2xl lg:text-3xl tracking-wide font-light mb-8 md:mb-12 italic">
                       {item.subtitle}
