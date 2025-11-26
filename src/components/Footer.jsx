@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
+  const { t } = useTranslation()
   return (
     <footer className="border-t border-black mt-20">
       <div className="max-w-screen-2xl mx-auto px-6 py-12">
@@ -13,7 +15,7 @@ const Footer = () => {
               <span className="text-xl tracking-tighter font-light">94</span>
             </Link>
             <p className="text-sm leading-relaxed">
-              Estudio de arquitectura, café de especialidad y espacio de diseño en Valencia.
+              {t('footerDescription')}
             </p>
           </div>
 

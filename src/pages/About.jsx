@@ -49,7 +49,7 @@ const About = () => {
                 
                 <div className="bg-gray-100 aspect-[4/3]">
                   <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    Foto del espacio
+                    {t('photoPlaceholder')}
                   </div>
                 </div>
               </motion.div>
@@ -76,7 +76,7 @@ const About = () => {
                 
                 <div className="bg-gray-100 aspect-[4/3]">
                   <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    Foto de la reforma
+                    {t('reformPhotoPlaceholder')}
                   </div>
                 </div>
               </motion.div>
@@ -122,8 +122,8 @@ const About = () => {
                   <div>
                     <h4 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">{t('location')}</h4>
                     <p className="text-lg md:text-xl tracking-tight leading-relaxed">
-                      Calle Trinitarios 13<br />
-                      Valencia, España
+                      {t('address')}<br />
+                      {t('city')}
                     </p>
                   </div>
 
