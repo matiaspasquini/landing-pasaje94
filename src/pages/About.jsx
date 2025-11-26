@@ -122,7 +122,7 @@ const About = () => {
                   <div>
                     <h4 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">{t('location')}</h4>
                     <p className="text-lg md:text-xl tracking-tight leading-relaxed">
-                      {t('address')}<br />
+                      {t('contactAddress')}<br />
                       {t('city')}
                     </p>
                   </div>
