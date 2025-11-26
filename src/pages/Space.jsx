@@ -406,14 +406,10 @@ const Space = () => {
               {item.type === 'intro' ? (
                 <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
                   <div className="text-center max-w-4xl">
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-tighter font-light mb-6 md:mb-8 relative">
-                      <span className="relative">
-                        Holy
-                        <span className="relative inline-block mx-8">
-                          <span className="absolute top-1/2 left-0 right-0 h-px bg-black transform -translate-y-1/2"></span>
-                        </span>
-                        days
-                      </span>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-tighter font-light mb-6 md:mb-8 flex items-center justify-center gap-8">
+                      <span>Holy</span>
+                      <span className="flex-1 h-px bg-black max-w-24"></span>
+                      <span>days</span>
                     </h1>
                     <h2 className="text-lg md:text-2xl lg:text-3xl tracking-wide font-light mb-8 md:mb-12 italic">
                       {item.subtitle}
