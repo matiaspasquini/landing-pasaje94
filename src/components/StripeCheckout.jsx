@@ -4,7 +4,10 @@ import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-
 import { motion } from 'framer-motion'
 
 // Publicable key de Stripe desde las variables de entorno
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+const stripePublishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+const stripePromise = stripePublishableKey && stripePublishableKey !== 'pk_test_development_placeholder' 
+  ? loadStripe(stripePublishableKey) 
+  : null
 
 const CheckoutForm = ({ onSuccess, onCancel, total }) => {
   const stripe = useStripe()
@@ -104,14 +107,19 @@ const StripeCheckout = ({ isOpen, onClose, cart, total, shippingCost = 0 }) => {
           shippingCost: shippingCost,
           shippingMethod: checkoutData.shippingMethod || 'standard',
           customerInfo: {
-            name: checkoutData.name,
+            firstName: checkoutData.firstName,
+            lastName: checkoutData.lastName,
+            company: checkoutData.company,
             email: checkoutData.email,
             phone: checkoutData.phone,
             address: checkoutData.address,
+            apartment: checkoutData.apartment,
             city: checkoutData.city,
             postalCode: checkoutData.postalCode,
+            province: checkoutData.province,
             country: checkoutData.country,
             notes: checkoutData.notes,
+            newsletter: checkoutData.newsletter,
           },
         }),
       })

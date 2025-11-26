@@ -1,10 +1,12 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 const About = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
+  const { t } = useTranslation()
 
   return (
     <div className="h-screen overflow-hidden">
@@ -27,7 +29,7 @@ const About = () => {
         style={{ scrollSnapType: 'none' }}
       >
         <div className="flex h-full gap-12 px-12" style={{ width: 'max-content' }}>
-          {/* About Section */}
+          {/* Sección 1: Descripción de Pasaje 94 */}
           <div className="flex-shrink-0 flex items-center" style={{ width: '90vw', maxWidth: '1400px' }}>
             <div className="w-full">
               <motion.div
@@ -37,87 +39,104 @@ const About = () => {
                 className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-16 items-center"
               >
                 <div>
-                  <h2 className="text-3xl md:text-5xl tracking-tighter font-light mb-4 md:mb-8">About</h2>
                   <p className="text-sm md:text-lg leading-relaxed mb-3 md:mb-6">
-                    Hace menos de un año decidimos abrir nuestro espacio en el centro de Valencia, 
-                    como una propuesta de apostar a quedarnos en una ciudad que no es nuestro origen.
-                  </p>
-                  <p className="text-sm md:text-lg leading-relaxed mb-3 md:mb-6">
-                    Decidimos abrir un espacio abierto a la comunidad, con un café de especialidad 
-                    y un espacio diáfano para exposición de productos de diseño.
+                    {t('aboutSection1Text1')}
                   </p>
                   <p className="text-sm md:text-lg leading-relaxed">
-                    Llevar el diseño a la vida diaria de las personas.
+                    {t('aboutSection1Text2')}
                   </p>
                 </div>
                 
                 <div className="bg-gray-100 aspect-[4/3]">
                   <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    Imagen del espacio
+                    Foto del espacio
                   </div>
                 </div>
               </motion.div>
             </div>
           </div>
 
-          {/* Contact Section */}
+          {/* Sección 2: Ubicación y reforma */}
           <div className="flex-shrink-0 flex items-center" style={{ width: '90vw', maxWidth: '1400px' }}>
             <div className="w-full">
               <motion.div
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-16 items-center"
               >
-                <h2 className="text-3xl md:text-5xl tracking-tighter font-light mb-8 md:mb-16">Contact</h2>
+                <div>
+                  <p className="text-sm md:text-lg leading-relaxed mb-3 md:mb-6">
+                    {t('aboutSection2Text1')}
+                  </p>
+                  <p className="text-sm md:text-lg leading-relaxed">
+                    {t('aboutSection2Text2')}
+                  </p>
+                </div>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24">
-                  {/* Left Side - Contact Info */}
-                  <div className="space-y-6 md:space-y-12">
-                    <div>
-                      <h3 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">Email</h3>
-                      <a
-                        href="mailto:info@pasaje94.com"
-                        className="text-lg md:text-2xl tracking-tight hover:opacity-60 transition-opacity"
-                      >
-                        info@pasaje94.com
-                      </a>
-                    </div>
+                <div className="bg-gray-100 aspect-[4/3]">
+                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                    Foto de la reforma
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
 
-                    <div>
-                      <h3 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">Location</h3>
-                      <p className="text-lg md:text-2xl tracking-tight leading-relaxed">
-                        Centro de Valencia<br />
-                        Valencia, España
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">Social</h3>
-                      <div className="flex gap-6 md:gap-8">
-                        <a
-                          href="https://instagram.com/pasaje94"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-base md:text-xl tracking-tight hover:opacity-60 transition-opacity"
-                        >
-                          Instagram
-                        </a>
-                      </div>
-                    </div>
+          {/* Sección 3: Servicios y contacto */}
+          <div className="flex-shrink-0 flex items-center" style={{ width: '90vw', maxWidth: '1400px' }}>
+            <div className="w-full">
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16"
+              >
+                <div>
+                  <h3 className="text-xl md:text-2xl tracking-tighter font-light mb-4 md:mb-6">
+                    {t('aboutSection3Title')}
+                  </h3>
+                  <p className="text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
+                    {t('aboutSection3Text1')}
+                  </p>
+                  <ul className="text-sm md:text-base leading-relaxed space-y-2">
+                    <li>{t('aboutServices1')}</li>
+                    <li>{t('aboutServices2')}</li>
+                    <li>{t('aboutServices3')}</li>
+                    <li>{t('aboutServices4')}</li>
+                    <li>{t('aboutServices5')}</li>
+                  </ul>
+                </div>
+                
+                <div className="space-y-6 md:space-y-8">
+                  <div>
+                    <h4 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">{t('email')}</h4>
+                    <a
+                      href="mailto:info@pasaje94.com"
+                      className="text-lg md:text-xl tracking-tight hover:opacity-60 transition-opacity"
+                    >
+                      info@pasaje94.com
+                    </a>
                   </div>
 
-                  {/* Right Side - Map */}
-                  <div className="bg-gray-100 aspect-[4/3] overflow-hidden">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.6669291712387!2d-0.37458822390351953!3d39.4768526123064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6049577aa76e89%3A0xa138113a98c17b0d!2sPasaje%2094!5e0!3m2!1ses!2sar!4v1763401760836!5m2!1ses!2sar" 
-                      width="100%" 
-                      height="100%" 
-                      style={{ border: 0 }} 
-                      allowFullScreen="" 
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Ubicación de Pasaje 94"
-                    />
+                  <div>
+                    <h4 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">{t('location')}</h4>
+                    <p className="text-lg md:text-xl tracking-tight leading-relaxed">
+                      Calle Trinitarios 13<br />
+                      Valencia, España
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs tracking-[0.2em] uppercase mb-2 md:mb-3 text-gray-600">{t('social')}</h4>
+                    <a
+                      href="https://instagram.com/pasaje94_"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-base md:text-lg tracking-tight hover:opacity-60 transition-opacity"
+                    >
+                      Instagram
+                    </a>
                   </div>
                 </div>
               </motion.div>

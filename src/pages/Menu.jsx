@@ -1,31 +1,33 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 const Menu = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   // Productos de café
   const coffeeProducts = [
-    { name: 'Espresso', price: '2.50' },
-    { name: 'Cortado', price: '2.80' },
-    { name: 'Café con Leche', price: '3.20' },
-    { name: 'Cappuccino', price: '3.50' },
-    { name: 'Flat White', price: '3.80' },
-    { name: 'V60 Filter', price: '4.50' },
-    { name: 'Chemex', price: '5.00' },
-    { name: 'Cold Brew', price: '4.20' },
+    { name: t('coffeeProducts.espresso'), price: '2.50' },
+    { name: t('coffeeProducts.cortado'), price: '2.80' },
+    { name: t('coffeeProducts.cafeConLeche'), price: '3.20' },
+    { name: t('coffeeProducts.cappuccino'), price: '3.50' },
+    { name: t('coffeeProducts.flatWhite'), price: '3.80' },
+    { name: t('coffeeProducts.v60Filter'), price: '4.50' },
+    { name: t('coffeeProducts.chemex'), price: '5.00' },
+    { name: t('coffeeProducts.coldBrew'), price: '4.20' },
   ]
 
   // Productos de comida
   const foodProducts = [
-    { name: 'Tostada con Aguacate', price: '6.50' },
-    { name: 'Croissant Natural', price: '2.80' },
-    { name: 'Croissant de Almendra', price: '3.20' },
-    { name: 'Tarta del Día', price: '4.50' },
-    { name: 'Banana Bread', price: '3.80' },
-    { name: 'Ensalada de Temporada', price: '8.50' },
-    { name: 'Sandwich Vegetal', price: '7.20' },
-    { name: 'Bagel con Salmón', price: '9.50' },
+    { name: t('foodProducts.tostadaAguacate'), price: '6.50' },
+    { name: t('foodProducts.croissantNatural'), price: '2.80' },
+    { name: t('foodProducts.croissantAlmendra'), price: '3.20' },
+    { name: t('foodProducts.tartaDelDia'), price: '4.50' },
+    { name: t('foodProducts.bananaBread'), price: '3.80' },
+    { name: t('foodProducts.ensaladaTemporada'), price: '8.50' },
+    { name: t('foodProducts.sandwichVegetal'), price: '7.20' },
+    { name: t('foodProducts.bagelSalmon'), price: '9.50' },
   ]
 
   return (
@@ -51,16 +53,15 @@ const Menu = () => {
           transition={{ duration: 0.8 }}
           className="min-w-full h-screen flex flex-col justify-center items-start px-6 md:px-16 snap-start"
         >
-          <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-8xl tracking-tighter font-light mb-4 md:mb-8 italic leading-none">
-              Menú
+          <div className="max-w-3xl">
+            <h1 className="text-5xl md:text-8xl tracking-tighter font-light mb-6 md:mb-12 italic leading-none">
+              {t('menuTitle')}
             </h1>
-            <p className="text-base md:text-2xl leading-tight mb-3 md:mb-6">
-              Una selección cuidada de café de especialidad y productos artesanales.
-            </p>
-            <p className="text-sm md:text-lg leading-tight text-gray-600">
-              Trabajamos con proveedores locales que comparten nuestra pasión por la calidad y el detalle.
-            </p>
+            <div className="space-y-4 md:space-y-6 text-sm md:text-lg leading-relaxed text-gray-700">
+              <p>{t('menuIntroText1')}</p>
+              <p>{t('menuIntroText2')}</p>
+              <p>{t('menuIntroText3')}</p>
+            </div>
           </div>
         </motion.div>
 
@@ -73,11 +74,10 @@ const Menu = () => {
         >
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-7xl tracking-tighter font-light mb-3 md:mb-6 italic leading-none">
-              FOC
+              {t('focTitle')}
             </h2>
             <p className="text-sm md:text-xl leading-tight mb-6 md:mb-12 text-gray-600">
-              Nuestro café de especialidad viene de FOC, tostadores valencianos comprometidos con la calidad 
-              y la sostenibilidad.
+              {t('focDescription')}
             </p>
 
             {/* Coffee Menu */}
@@ -104,11 +104,10 @@ const Menu = () => {
         >
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-7xl tracking-tighter font-light mb-3 md:mb-6 italic leading-none">
-              Productos Artesanales
+              {t('artisanalProductsTitle')}
             </h2>
             <p className="text-sm md:text-xl leading-tight mb-6 md:mb-12 text-gray-600">
-              Nuestros productos de repostería y comida son elaborados diariamente con ingredientes frescos 
-              y de temporada.
+              {t('artisanalProductsDescription')}
             </p>
 
             {/* Food Menu */}
@@ -135,10 +134,10 @@ const Menu = () => {
         >
           <div className="max-w-xl text-center">
             <h2 className="text-4xl md:text-7xl tracking-tighter font-light mb-4 md:mb-8 italic leading-none">
-              Menú Digital
+              {t('digitalMenuTitle')}
             </h2>
             <p className="text-sm md:text-xl leading-tight mb-6 md:mb-12 text-gray-600">
-              Escanea el código QR en tu mesa para ver nuestro menú completo.
+              {t('digitalMenuDescription')}
             </p>
             
             {/* Placeholder para QR Code */}

@@ -1,11 +1,43 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
-import { mockProjects, mockExhibitions } from '../utils/mockData'
+import { useTranslation } from 'react-i18next'
 
 const Archive = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
+  const { t } = useTranslation()
+
+  // Estructura de artistas del archivo
+  const artists = [
+    {
+      id: 'angel-tausia',
+      name: 'Angel Tausia Objects',
+      description: t('angelTausiaDescription')
+    },
+    {
+      id: 'fer-figueroa', 
+      name: 'Fer Figueroa',
+      description: t('ferFigueroaDescription')
+    },
+    {
+      id: 'bama-archive',
+      name: 'Bama',
+      subtitle: 'BAMA — Between Art & Material Atmospheres',
+      description: t('bamaArchiveDescription')
+    },
+    {
+      id: 'bruno-archive',
+      name: 'Bruno Mespulet',
+      subtitle: 'Encender para recordar, contemplar para permanecer.',
+      description: t('brunoArchiveDescription')
+    },
+    {
+      id: 'objetos-decorativos',
+      name: 'Los objetos decorativos',
+      description: t('objetosDecorativosDescription')
+    }
+  ]
 
   return (
     <div className="h-screen overflow-hidden">
@@ -22,93 +54,41 @@ const Archive = () => {
         </div>
       </div>
 
+      {/* Horizontal Scroll Container */}
       <div
         ref={containerRef}
         className="overflow-x-auto overflow-y-hidden h-full scrollbar-hide pt-20"
         style={{ scrollSnapType: 'none' }}
       >
         <div className="flex h-full gap-12 px-12" style={{ width: 'max-content' }}>
-          {/* Projects Archive */}
-          <div className="flex-shrink-0 flex items-center" style={{ width: '90vw', maxWidth: '1400px' }}>
-            <div className="w-full h-[75vh] md:h-[80vh] overflow-y-auto">
-              <motion.div
-                initial={{ opacity: 0, x: 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h2 className="text-3xl md:text-5xl tracking-tighter font-light mb-6 md:mb-12">Projects</h2>
-                
-                <div className="space-y-4 md:space-y-6 pr-4 md:pr-8">
-                  {mockProjects.map((project) => (
-                    <div
-                      key={project.id}
-                      className="border-b border-gray-200 pb-3 md:pb-6 hover:opacity-60 transition-opacity cursor-pointer"
-                    >
-                      <div className="flex justify-between items-start gap-4 md:gap-8">
-                        <div className="flex-1">
-                          <h3 className="text-base md:text-2xl font-light mb-1 md:mb-2">{project.title}</h3>
-                          <p className="text-xs md:text-sm text-gray-600 mb-1 md:mb-2">{project.location}</p>
-                          <p className="text-xs md:text-sm leading-relaxed line-clamp-2">{project.description}</p>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="text-xs md:text-sm tracking-wider">{project.year}</p>
-                          <p className="text-[10px] md:text-xs text-gray-600 mt-1">{project.category}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+          {artists.map((artist, index) => (
+            <motion.div
+              key={artist.id}
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex-shrink-0 flex items-start py-12 md:items-center md:py-0"
+              style={{ width: '90vw', maxWidth: '1400px' }}
+            >
+              <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
+                <div className="text-center max-w-4xl">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-4 md:mb-6">
+                    {artist.name}
+                  </h1>
+                  {artist.subtitle && (
+                    <h2 className="text-lg md:text-2xl lg:text-3xl tracking-wide font-light mb-8 md:mb-12 italic text-gray-600">
+                      {artist.subtitle}
+                    </h2>
+                  )}
+                  <div className="text-sm md:text-base leading-relaxed text-gray-700 max-w-3xl mx-auto text-left space-y-4 md:space-y-6">
+                    {artist.description.split('\n\n').map((paragraph, pIndex) => (
+                      <p key={pIndex}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Exhibitions Archive */}
-          <div className="flex-shrink-0 flex items-center" style={{ width: '90vw', maxWidth: '1400px' }}>
-            <div className="w-full h-[75vh] md:h-[80vh] overflow-y-auto">
-              <motion.div
-                initial={{ opacity: 0, x: 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h2 className="text-3xl md:text-5xl tracking-tighter font-light mb-6 md:mb-12">Exhibitions</h2>
-                
-                <div className="space-y-4 md:space-y-6 pr-4 md:pr-8">
-                  {mockExhibitions.map((exhibition) => (
-                    <div
-                      key={exhibition.id}
-                      className="border-b border-gray-200 pb-3 md:pb-6 hover:opacity-60 transition-opacity cursor-pointer"
-                    >
-                      <div className="flex justify-between items-start gap-4 md:gap-8">
-                        <div className="flex-1">
-                          <h3 className="text-base md:text-2xl font-light mb-1 md:mb-2">{exhibition.title}</h3>
-                          <p className="text-xs md:text-sm text-gray-600 mb-1 md:mb-2">{exhibition.artist}</p>
-                          <p className="text-xs md:text-sm leading-relaxed line-clamp-2">{exhibition.description}</p>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="text-[10px] md:text-xs tracking-wider">
-                            {new Date(exhibition.startDate).toLocaleDateString('es-ES', {
-                              year: 'numeric',
-                              month: 'short',
-                            })}
-                            {' — '}
-                            {new Date(exhibition.endDate).toLocaleDateString('es-ES', {
-                              year: 'numeric',
-                              month: 'short',
-                            })}
-                          </p>
-                          {exhibition.current && (
-                            <span className="inline-block mt-1 md:mt-2 px-1.5 py-0.5 md:px-2 md:py-1 bg-black text-white text-[10px] md:text-xs">
-                              NOW
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -121,7 +101,7 @@ const Archive = () => {
               style={{ scaleX: scrollXProgress, transformOrigin: 'left' }}
             />
           </div>
-          <p className="text-xs text-gray-600 mt-2">Scroll horizontally →</p>
+          <p className="text-xs text-gray-600 mt-2">{t('archiveScrollText')}</p>
         </div>
       </div>
     </div>

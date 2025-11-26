@@ -1,11 +1,13 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { mockProjects } from '../utils/mockData'
 
 const Projects = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
+  const { t } = useTranslation()
 
   return (
     <div className="h-screen overflow-hidden">
@@ -30,9 +32,9 @@ const Projects = () => {
       >
         <div className="flex h-full gap-12 px-12" style={{ width: 'max-content' }}>
           {/* Proyectos */}
-          {mockProjects.map((project, index) => (
+          {[1, 2, 3, 4, 5].map((projectNum, index) => (
             <motion.div
-              key={project.id}
+              key={projectNum}
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -42,35 +44,31 @@ const Projects = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 w-full max-w-screen-2xl mx-auto">
                 {/* Image */}
                 <div className="aspect-[4/3] bg-gray-100">
-                  {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                      {project.title}
-                    </div>
-                  )}
+                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                    {t(`project${projectNum}Title`)}
+                  </div>
                 </div>
 
                 {/* Info */}
                 <div className="flex flex-col justify-center">
-                  <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-1 md:mb-2">
-                    {project.category}
-                  </p>
+                  {t(`project${projectNum}Category`) && (
+                    <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-1 md:mb-2">
+                      {t(`project${projectNum}Category`)}
+                    </p>
+                  )}
                   <h2 className="text-2xl md:text-4xl tracking-tighter font-light mb-2 md:mb-4">
-                    {project.title}
+                    {t(`project${projectNum}Title`)}
                   </h2>
-                  <p className="text-sm md:text-lg mb-2 md:mb-4">
-                    {project.location} — {project.year}
-                  </p>
+                  {(t(`project${projectNum}Location`) || t(`project${projectNum}Year`)) && (
+                    <p className="text-sm md:text-lg mb-2 md:mb-4">
+                      {t(`project${projectNum}Location`)}{t(`project${projectNum}Location`) && t(`project${projectNum}Year`) && ' — '}{t(`project${projectNum}Year`)}
+                    </p>
+                  )}
                   <p className="text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-4">
-                    {project.description}
+                    {t(`project${projectNum}Description`)}
                   </p>
                   <div className="text-xs md:text-sm text-gray-600">
-                    Project {index + 1} of {mockProjects.length}
+                    {t('projectOf')} {index + 1} {t('of')} 5
                   </div>
                 </div>
               </div>
@@ -88,7 +86,7 @@ const Projects = () => {
               style={{ scaleX: scrollXProgress, transformOrigin: 'left' }}
             />
           </div>
-          <p className="text-xs text-gray-600 mt-2">Scroll horizontally →</p>
+          <p className="text-xs text-gray-600 mt-2">{t('projectsScrollText')}</p>
         </div>
       </div>
     </div>

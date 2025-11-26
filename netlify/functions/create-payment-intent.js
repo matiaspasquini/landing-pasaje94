@@ -1,6 +1,22 @@
 import Stripe from 'stripe'
 
 export const handler = async (event) => {
+  // Configurar headers CORS
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
+
+  // Manejar preflight OPTIONS request
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+    }
+  }
+
   // Inicializar Stripe con la clave secreta
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
   
@@ -8,6 +24,7 @@ export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers,
       body: JSON.stringify({ error: 'Method Not Allowed' })
     }
   }
@@ -19,6 +36,7 @@ export const handler = async (event) => {
     if (!amount || amount <= 0) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: 'Invalid amount' })
       }
     }
@@ -35,18 +53,23 @@ export const handler = async (event) => {
       automatic_payment_methods: {
         enabled: true,
       },
-      description: `Pedido de ${customerInfo?.name || 'Cliente'}: ${itemsDescription}`,
+      description: `Pedido de ${customerInfo?.firstName} ${customerInfo?.lastName}: ${itemsDescription}`,
       receipt_email: customerInfo?.email, // Stripe enviará recibo automáticamente (solo en LIVE mode)
       metadata: {
         // Información del cliente
-        customer_name: customerInfo?.name || '',
+        customer_first_name: customerInfo?.firstName || '',
+        customer_last_name: customerInfo?.lastName || '',
+        customer_company: customerInfo?.company || '',
         customer_email: customerInfo?.email || '',
         customer_phone: customerInfo?.phone || '',
         customer_address: customerInfo?.address || '',
+        customer_apartment: customerInfo?.apartment || '',
         customer_city: customerInfo?.city || '',
         customer_postal_code: customerInfo?.postalCode || '',
+        customer_province: customerInfo?.province || '',
         customer_country: customerInfo?.country || '',
         customer_notes: customerInfo?.notes || '',
+        customer_newsletter: customerInfo?.newsletter || false,
         // Información de envío
         shipping_method: shippingMethod,
         shipping_cost: shippingCost.toFixed(2),
@@ -64,10 +87,7 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers,
       body: JSON.stringify({
         clientSecret: paymentIntent.client_secret,
         paymentIntentId: paymentIntent.id,
@@ -78,10 +98,7 @@ export const handler = async (event) => {
     
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers,
       body: JSON.stringify({
         error: error.message || 'Internal server error'
       })

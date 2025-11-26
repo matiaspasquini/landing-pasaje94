@@ -4,15 +4,6 @@ body {
   background-color: white;
   color: black;
   font-family: 'Inter', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  line-height: 1.5;
-}
-
-p {
-  line-height: 1.6;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
 }
 
 @layer utilities {
