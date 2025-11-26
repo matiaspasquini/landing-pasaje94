@@ -134,16 +134,6 @@ const Space = () => {
       category: 'lighting'
     },
     {
-      id: 'bruno-2',
-      type: 'product',
-      name: 'C 07 10 S1 (alt)',
-      artist: t('brunoMespuletName'),
-      collection: t('brunoMespuletCollection'),
-      price: 94.00,
-      image: brunoImg2,
-      category: 'lighting'
-    },
-    {
       id: 'bruno-3',
       type: 'product',
       name: 'C 07 10 S2',
@@ -154,16 +144,6 @@ const Space = () => {
       category: 'lighting'
     },
     {
-      id: 'bruno-4',
-      type: 'product',
-      name: 'C 07 10 S2 (alt)',
-      artist: t('brunoMespuletName'),
-      collection: t('brunoMespuletCollection'),
-      price: 280.00,
-      image: brunoImg4,
-      category: 'lighting'
-    },
-    {
       id: 'bruno-5',
       type: 'product',
       name: 'C 07 10 S3',
@@ -171,16 +151,6 @@ const Space = () => {
       collection: t('brunoMespuletCollection'),
       price: 188.00,
       image: brunoImg5,
-      category: 'lighting'
-    },
-    {
-      id: 'bruno-6',
-      type: 'product',
-      name: 'C 07 10 S3 (alt)',
-      artist: t('brunoMespuletName'),
-      collection: t('brunoMespuletCollection'),
-      price: 188.00,
-      image: brunoImg6,
       category: 'lighting'
     },
     
@@ -295,16 +265,6 @@ const Space = () => {
       image: albertoImg3,
       category: 'objects'
     },
-    {
-      id: 'alberto-4',
-      type: 'product',
-      name: 'BRICK Vase 05',
-      artist: t('albertoDesignName'),
-      collection: t('albertoDesignCollection'),
-      price: 135.00,
-      image: albertoImg4,
-      category: 'objects'
-    },
     
     // Intro LOD
     {
@@ -378,23 +338,13 @@ const Space = () => {
     
     // Productos Giov
     {
-      id: 'giov-1',
+      id: 'giov-5',
       type: 'product',
-      name: 'Candleholder I',
+      name: 'Candleholders Set',
       artist: t('giovName'),
       collection: t('giovCollection'),
       price: 55.00,
-      image: giovImg1,
-      category: 'ceramics'
-    },
-    {
-      id: 'giov-2',
-      type: 'product',
-      name: 'Candleholder II',
-      artist: t('giovName'),
-      collection: t('giovCollection'),
-      price: 55.00,
-      image: giovImg2,
+      image: giovImg5,
       category: 'ceramics'
     },
     {
@@ -406,26 +356,6 @@ const Space = () => {
       price: 160.00,
       image: giovImg3,
       category: 'lighting'
-    },
-    {
-      id: 'giov-5',
-      type: 'product',
-      name: 'Candleholders Set',
-      artist: t('giovName'),
-      collection: t('giovCollection'),
-      price: 55.00,
-      image: giovImg5,
-      category: 'ceramics'
-    },
-    {
-      id: 'giov-6',
-      type: 'product',
-      name: 'Studio Objects',
-      artist: t('giovName'),
-      collection: t('giovCollection'),
-      price: 65.00,
-      image: giovImg6,
-      category: 'objects'
     }
   ]
 
@@ -464,9 +394,9 @@ const Space = () => {
               {item.type === 'intro' ? (
                 <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
                   <div className="text-center max-w-4xl">
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-tighter font-light mb-6 md:mb-8 flex items-center justify-center gap-8">
-                      <span>Holy</span>
-                      <span className="flex-1 h-0.5 bg-black max-w-40"></span>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-tighter font-light mb-6 md:mb-8 flex items-center justify-center gap-8" style={{ fontFamily: 'Georgia, serif' }}>
+                      <span>holy</span>
+                      <span className="flex-1 h-0.5 bg-black max-w-60"></span>
                       <span>days</span>
                     </h1>
                     <h2 className="text-lg md:text-2xl lg:text-3xl tracking-wide font-light mb-8 md:mb-12 italic">
