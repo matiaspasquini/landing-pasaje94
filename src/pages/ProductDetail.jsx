@@ -78,7 +78,7 @@ const ProductDetail = () => {
                   : 'opacity-50 cursor-not-allowed'
               }`}
             >
-              {product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
+              {product.inStock ? t('addToCart') : t('outOfStock')}
             </button>
 
             {/* Stock Status */}

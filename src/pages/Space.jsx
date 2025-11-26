@@ -467,7 +467,7 @@ const Space = () => {
                       onClick={() => addToCart(item)}
                       className="px-4 py-2 md:px-6 md:py-3 bg-black text-white hover:bg-gray-800 transition-colors w-fit text-xs md:text-base"
                     >
-                      Add to Cart
+                      {t('addToCart')}
                     </button>
                   </div>
                 </div>

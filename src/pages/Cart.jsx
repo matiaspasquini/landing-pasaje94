@@ -16,12 +16,12 @@ const Cart = () => {
     return (
       <div className="min-h-screen pt-32 px-6 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-3xl tracking-tighter font-light mb-4">Your cart is empty</h2>
+          <h2 className="text-3xl tracking-tighter font-light mb-4">{t('yourCartIsEmpty')}</h2>
           <Link
             to="/shop"
             className="inline-block px-8 py-3 border border-black hover:bg-black hover:text-white transition-colors text-sm tracking-wider"
           >
-            CONTINUE SHOPPING
+            {t('continueShopping')}
           </Link>
         </div>
       </div>
@@ -136,7 +136,7 @@ const Cart = () => {
                   to="/shop"
                   className="block text-center text-sm hover:opacity-60 transition-opacity"
                 >
-                  Continue shopping
+                  {t('continueShopping')}
                 </Link>
               </div>
             </div>

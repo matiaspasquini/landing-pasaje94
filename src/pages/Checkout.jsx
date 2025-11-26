@@ -590,7 +590,7 @@ const Checkout = () => {
                 {/* Shipping Method */}
                 <div>
                   <h2 className="text-2xl tracking-tighter font-light mb-6">
-                    Shipping Method
+                    {t('checkout.shippingMethod')}
                   </h2>
                   
                   <div className="space-y-3">
@@ -605,12 +605,12 @@ const Checkout = () => {
                           className="mr-3"
                         />
                         <div>
-                          <p className="font-medium">Standard Shipping</p>
+                          <p className="font-medium">{t('checkout.standardShipping')}</p>
                           <p className="text-sm text-gray-600">
-                            {shippingZone === 'spain' && '2-3 business days'}
-                            {shippingZone === 'europe-core' && '4-6 business days'}
-                            {shippingZone === 'europe-extended' && '5-8 business days'}
-                            {shippingZone === 'international' && '10-15 business days'}
+                            {shippingZone === 'spain' && `2-3 ${t('businessDays')}`}
+                            {shippingZone === 'europe-core' && `4-6 ${t('businessDays')}`}
+                            {shippingZone === 'europe-extended' && `5-8 ${t('businessDays')}`}
+                            {shippingZone === 'international' && `10-15 ${t('businessDays')}`}
                           </p>
                         </div>
                       </div>
@@ -628,12 +628,12 @@ const Checkout = () => {
                           className="mr-3"
                         />
                         <div>
-                          <p className="font-medium">Express Shipping</p>
+                          <p className="font-medium">{t('checkout.expressShipping')}</p>
                           <p className="text-sm text-gray-600">
                             {shippingZone === 'spain' && '24-48h'}
-                            {shippingZone === 'europe-core' && '2-3 business days'}
-                            {shippingZone === 'europe-extended' && '3-5 business days'}
-                            {shippingZone === 'international' && '5-8 business days'}
+                            {shippingZone === 'europe-core' && `2-3 ${t('businessDays')}`}
+                            {shippingZone === 'europe-extended' && `3-5 ${t('businessDays')}`}
+                            {shippingZone === 'international' && `5-8 ${t('businessDays')}`}
                           </p>
                         </div>
                       </div>
@@ -652,11 +652,11 @@ const Checkout = () => {
                             className="mr-3"
                           />
                           <div>
-                            <p className="font-medium">Pick up at Store</p>
+                            <p className="font-medium">{t('checkout.pickupAtStore')}</p>
                             <p className="text-sm text-gray-600">Pasaje 94, Valencia</p>
                           </div>
                         </div>
-                        <span className="font-medium">FREE</span>
+                        <span className="font-medium">{t('free')}</span>
                       </label>
                     )}
                   </div>
@@ -697,7 +697,7 @@ const Checkout = () => {
                     <span>Shipping ({shippingZone === 'spain' ? 'Spain' : shippingZone === 'europe-core' ? 'EU Core' : shippingZone === 'europe-extended' ? 'EU Extended' : 'International'})</span>
                     <span>
                       {formData.shippingMethod === 'pickup' 
-                        ? 'FREE' 
+                        ? t('free') 
                         : `€${shippingCosts[shippingZone][formData.shippingMethod].toFixed(2)}`}
                     </span>
                   </div>

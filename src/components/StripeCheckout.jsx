@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 // Publicable key de Stripe desde las variables de entorno
 const stripePublishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
@@ -80,6 +81,7 @@ const CheckoutForm = ({ onSuccess, onCancel, total }) => {
 const StripeCheckout = ({ isOpen, onClose, cart, total, shippingCost = 0 }) => {
   const [clientSecret, setClientSecret] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const { t } = useTranslation()
 
   const handleInitiateCheckout = async () => {
     setIsLoading(true)
@@ -171,7 +173,7 @@ const StripeCheckout = ({ isOpen, onClose, cart, total, shippingCost = 0 }) => {
       >
         <div className="p-8">
           <div className="flex justify-between items-start mb-8">
-            <h2 className="text-4xl tracking-tighter font-light">Checkout</h2>
+            <h2 className="text-4xl tracking-tighter font-light">{t('checkout.title')}</h2>
             <button
               onClick={onClose}
               className="text-2xl hover:opacity-60 transition-opacity"

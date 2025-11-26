@@ -93,7 +93,7 @@ const OrderConfirmation = () => {
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/space" className="text-sm tracking-wider hover:opacity-60 border-b border-black pb-1">
-              Continue Shopping
+              {t('continueShopping')}
             </Link>
             <Link to="/" className="text-sm tracking-wider hover:opacity-60 border-b border-black pb-1">
               Home
@@ -166,7 +166,7 @@ const OrderConfirmation = () => {
                 to="/space"
                 className="px-8 py-3 border border-black hover:bg-black hover:text-white transition-colors text-sm tracking-wider"
               >
-                CONTINUE SHOPPING
+                {t('continueShopping')}
               </Link>
               <Link
                 to="/"
@@ -258,7 +258,7 @@ const OrderConfirmation = () => {
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Shipping ({orderData.shippingMethod})</span>
-                  <span>{orderData.shippingCost === 0 ? 'FREE' : `€${orderData.shippingCost.toFixed(2)}`}</span>
+                  <span>{orderData.shippingCost === 0 ? t('free') : `€${orderData.shippingCost.toFixed(2)}`}</span>
                 </div>
                 <div className="flex justify-between text-lg font-medium pt-2 border-t">
                   <span className="tracking-wider">TOTAL</span>

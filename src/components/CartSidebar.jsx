@@ -56,7 +56,7 @@ const CartSidebar = () => {
             <div className="flex-1 overflow-y-auto p-6">
               {cartItems.length === 0 ? (
                 <div className="flex items-center justify-center h-full">
-                  <p className="text-gray-400">Your cart is empty</p>
+                  <p className="text-gray-400">{t('yourCartIsEmpty')}</p>
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -123,7 +123,7 @@ const CartSidebar = () => {
                   onClick={handleCheckout}
                   className="w-full py-3 bg-black text-white hover:bg-gray-800 transition-colors tracking-wider text-sm"
                 >
-                  CHECKOUT
+                  {t('checkout')}
                 </button>
               </div>
             )}
