@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://pasaje94.com/</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pasaje94.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasaje94.com/"/>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://pasaje94.com/about</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pasaje94.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasaje94.com/about"/>
+  </url>
+  
+  <!-- Projects Page -->
+  <url>
+    <loc>https://pasaje94.com/projects</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pasaje94.com/projects"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasaje94.com/projects"/>
+  </url>
+  
+  <!-- Shop Page -->
+  <url>
+    <loc>https://pasaje94.com/space</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pasaje94.com/space"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasaje94.com/space"/>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://pasaje94.com/contact</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pasaje94.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pasaje94.com/contact"/>
+  </url>
+  
+</urlset>

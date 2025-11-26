@@ -1,0 +1,20 @@
+# Netlify redirects and headers
+# This file is mainly for documentation purposes as Netlify uses _redirects and _headers files
+
+# Force HTTPS (Netlify handles this automatically)
+# Redirect http to https
+
+# Enable compression (Netlify handles this automatically)
+# Gzip compression for better performance
+
+# Set cache headers for static assets (Netlify handles this automatically)
+# Cache images, CSS, JS files
+
+# Security headers (can be configured in _headers file for Netlify)
+# X-Content-Type-Options: nosniff
+# X-Frame-Options: DENY
+# X-XSS-Protection: 1; mode=block
+# Referrer-Policy: strict-origin-when-cross-origin
+
+# SPA routing - redirect all routes to index.html (handled by Netlify _redirects)
+# /*    /index.html   200

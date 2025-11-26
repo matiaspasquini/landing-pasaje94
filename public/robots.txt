@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pasaje94.com/sitemap.xml
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow admin areas if any
+# Disallow: /admin/
+# Disallow: /api/
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1

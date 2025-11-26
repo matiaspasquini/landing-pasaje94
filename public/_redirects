@@ -1,0 +1,11 @@
+# Netlify redirects file for SPA routing
+# All routes should serve index.html for React Router to handle
+/*    /index.html   200
+
+# Optional: Redirect common variations to canonical URLs
+/shop    /space    301
+/tienda    /space    301
+
+# Force HTTPS (optional, Netlify does this by default)
+http://pasaje94.com/*    https://pasaje94.com/:splat    301!
+http://www.pasaje94.com/*    https://pasaje94.com/:splat    301!
