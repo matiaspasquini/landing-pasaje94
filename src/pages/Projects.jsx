@@ -4,6 +4,10 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { mockProjects } from '../utils/mockData'
 
+// Importar imágenes
+import pasajeFachadaImg from '../assets/About/Pasaje 94 Fachada.jpg'
+import galleryImg from '../assets/projects/IMG_3812.jpg'
+
 const Projects = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
@@ -31,49 +35,91 @@ const Projects = () => {
         style={{ scrollSnapType: 'none' }}
       >
         <div className="flex h-full gap-12 px-12" style={{ width: 'max-content' }}>
-          {/* Proyectos */}
-          {[1, 2, 3, 4, 5].map((projectNum, index) => (
-            <motion.div
-              key={projectNum}
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex-shrink-0 flex items-center"
-              style={{ width: '90vw', maxWidth: '1400px' }}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 w-full max-w-screen-2xl mx-auto">
-                {/* Image */}
-                <div className="aspect-[4/3] bg-gray-100">
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    {t(`project${projectNum}Title`)}
-                  </div>
-                </div>
+          {/* Proyecto 1: Pasaje 94 */}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex-shrink-0 flex items-center"
+            style={{ width: '90vw', maxWidth: '1400px' }}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 w-full max-w-screen-2xl mx-auto">
+              {/* Image */}
+              <div className="aspect-[4/3] bg-gray-100">
+                <img
+                  src={pasajeFachadaImg}
+                  alt="Pasaje 94"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-                {/* Info */}
-                <div className="flex flex-col justify-center">
-                  {t(`project${projectNum}Category`) && (
-                    <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-1 md:mb-2">
-                      {t(`project${projectNum}Category`)}
-                    </p>
-                  )}
-                  <h2 className="text-2xl md:text-4xl tracking-tighter font-light mb-2 md:mb-4">
-                    {t(`project${projectNum}Title`)}
-                  </h2>
-                  {(t(`project${projectNum}Location`) || t(`project${projectNum}Year`)) && (
-                    <p className="text-sm md:text-lg mb-2 md:mb-4">
-                      {t(`project${projectNum}Location`)}{t(`project${projectNum}Location`) && t(`project${projectNum}Year`) && ' — '}{t(`project${projectNum}Year`)}
-                    </p>
-                  )}
-                  <p className="text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-4">
-                    {t(`project${projectNum}Description`)}
+              {/* Info */}
+              <div className="flex flex-col justify-center">
+                {t('project1Category') && (
+                  <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-1 md:mb-2">
+                    {t('project1Category')}
                   </p>
-                  <div className="text-xs md:text-sm text-gray-600">
-                    {t('projectOf')} {index + 1} {t('of')} 5
-                  </div>
+                )}
+                <h2 className="text-2xl md:text-4xl tracking-tighter font-light mb-2 md:mb-4">
+                  {t('project1Title')}
+                </h2>
+                {(t('project1Location') || t('project1Year')) && (
+                  <p className="text-sm md:text-lg mb-2 md:mb-4">
+                    {t('project1Location')}{t('project1Location') && t('project1Year') && ' — '}{t('project1Year')}
+                  </p>
+                )}
+                <p className="text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-4">
+                  {t('project1Description')}
+                </p>
+                <div className="text-xs md:text-sm text-gray-600">
+                  {t('projectOf')} 1 {t('of')} 2
                 </div>
               </div>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
+
+          {/* Proyecto 2: Osnova Gallery */}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex-shrink-0 flex items-center"
+            style={{ width: '90vw', maxWidth: '1400px' }}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 w-full max-w-screen-2xl mx-auto">
+              {/* Image */}
+              <div className="aspect-[4/3] bg-gray-100">
+                <img
+                  src={galleryImg}
+                  alt="Osnova Gallery"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Info */}
+              <div className="flex flex-col justify-center">
+                {t('project5Category') && (
+                  <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-1 md:mb-2">
+                    {t('project5Category')}
+                  </p>
+                )}
+                <h2 className="text-2xl md:text-4xl tracking-tighter font-light mb-2 md:mb-4">
+                  {t('project5Title')}
+                </h2>
+                {(t('project5Location') || t('project5Year')) && (
+                  <p className="text-sm md:text-lg mb-2 md:mb-4">
+                    {t('project5Location')}{t('project5Location') && t('project5Year') && ' — '}{t('project5Year')}
+                  </p>
+                )}
+                <p className="text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-4">
+                  {t('project5Description')}
+                </p>
+                <div className="text-xs md:text-sm text-gray-600">
+                  {t('projectOf')} 2 {t('of')} 2
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 

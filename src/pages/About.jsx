@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
+// Importar imágenes
+import fachadaImg from '../assets/About/Pasaje 94 Fachada.jpg'
+import arquitectasImg from '../assets/About/Pasaje 94 Arquitectas.jpeg'
+
 const About = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
@@ -48,9 +52,11 @@ const About = () => {
                 </div>
                 
                 <div className="bg-gray-100 aspect-[4/3]">
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    {t('photoPlaceholder')}
-                  </div>
+                  <img
+                    src={fachadaImg}
+                    alt="Pasaje 94 Fachada"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </motion.div>
             </div>
@@ -75,9 +81,11 @@ const About = () => {
                 </div>
                 
                 <div className="bg-gray-100 aspect-[4/3]">
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    {t('reformPhotoPlaceholder')}
-                  </div>
+                  <img
+                    src={arquitectasImg}
+                    alt="Pasaje 94 Arquitectas"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </motion.div>
             </div>
