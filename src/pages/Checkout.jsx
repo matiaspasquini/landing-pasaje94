@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '../contexts/CartContext'
@@ -31,35 +31,45 @@ const Checkout = () => {
   const [errors, setErrors] = useState({})
   const [shippingZone, setShippingZone] = useState('spain') // spain, europe, international
 
-  // Costos de envío por zona
+  // Costos de envío por zona (precios competitivos para Europa)
   const shippingCosts = {
     spain: {
-      standard: 5.00,    // 3-5 días
-      express: 12.00,    // 1-2 días
+      standard: 4.90,    // 2-3 días laborables
+      express: 9.90,     // 24-48h
       pickup: 0.00,      // Recoger en tienda
     },
-    europe: {
-      standard: 15.00,   // 5-7 días
-      express: 30.00,    // 2-3 días
+    'europe-core': {
+      standard: 12.90,   // 4-6 días laborables  
+      express: 24.90,    // 2-3 días laborables
+      pickup: null,      // No disponible
+    },
+    'europe-extended': {
+      standard: 18.90,   // 5-8 días laborables
+      express: 34.90,    // 3-5 días laborables
       pickup: null,      // No disponible
     },
     international: {
-      standard: 35.00,   // 7-14 días
-      express: 60.00,    // 3-5 días
+      standard: 45.00,   // 10-15 días laborables
+      express: 65.00,    // 5-8 días laborables
       pickup: null,      // No disponible
     }
   }
 
   // Detectar zona de envío según país
   const detectShippingZone = (country) => {
-    const euCountries = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'SE']
+    // Países de la zona euro principal (envío más económico)
+    const euCoreCountries = ['FR', 'IT', 'PT', 'DE', 'NL', 'BE', 'AT', 'LU']
+    
+    // Países europeos extendidos (envío moderado)
+    const euExtendedCountries = ['UK', 'IE', 'CH', 'NO', 'SE', 'DK', 'FI', 'PL', 'CZ', 'GR']
     
     if (country === 'ES') return 'spain'
-    if (euCountries.includes(country)) return 'europe'
+    if (euCoreCountries.includes(country)) return 'europe-core'
+    if (euExtendedCountries.includes(country)) return 'europe-extended'
     return 'international'
   }
 
-  // Obtener provincias según país
+  // Obtener provincias según país (enfocado en Europa)
   const getProvincesByCountry = (country) => {
     const provinces = {
       'ES': [
@@ -71,7 +81,14 @@ const Checkout = () => {
         { value: 'Zaragoza', label: 'Zaragoza' },
         { value: 'Málaga', label: 'Málaga' },
         { value: 'Murcia', label: 'Murcia' },
-        { value: 'other', label: 'Other' }
+        { value: 'Las Palmas', label: 'Las Palmas' },
+        { value: 'Palma', label: 'Palma' },
+        { value: 'Vigo', label: 'Vigo' },
+        { value: 'A Coruña', label: 'A Coruña' },
+        { value: 'Granada', label: 'Granada' },
+        { value: 'Alicante', label: 'Alicante' },
+        { value: 'Córdoba', label: 'Córdoba' },
+        { value: 'Santander', label: 'Santander' }
       ],
       'FR': [
         { value: 'Île-de-France', label: 'Île-de-France (Paris)' },
@@ -84,62 +101,103 @@ const Checkout = () => {
         { value: 'Pays de la Loire', label: 'Pays de la Loire' },
         { value: 'Bretagne', label: 'Bretagne' },
         { value: 'Normandie', label: 'Normandie' },
-        { value: 'other', label: 'Other' }
+        { value: 'Centre-Val de Loire', label: 'Centre-Val de Loire' },
+        { value: 'Bourgogne-Franche-Comté', label: 'Bourgogne-Franche-Comté' }
       ],
       'IT': [
         { value: 'Lombardia', label: 'Lombardia' },
-        { value: 'Lazio', label: 'Lazio' },
-        { value: 'Campania', label: 'Campania' },
-        { value: 'Veneto', label: 'Veneto' },
-        { value: 'Emilia-Romagna', label: 'Emilia-Romagna' },
-        { value: 'Piemonte', label: 'Piemonte' },
-        { value: 'Puglia', label: 'Puglia' },
-        { value: 'Toscana', label: 'Toscana' },
-        { value: 'Calabria', label: 'Calabria' },
-        { value: 'Sicilia', label: 'Sicilia' },
-        { value: 'other', label: 'Other' }
+        { value: 'Lazio', label: 'Lazio (Roma)' },
+        { value: 'Campania', label: 'Campania (Napoli)' },
+        { value: 'Veneto', label: 'Veneto (Venezia)' },
+        { value: 'Emilia-Romagna', label: 'Emilia-Romagna (Bologna)' },
+        { value: 'Piemonte', label: 'Piemonte (Torino)' },
+        { value: 'Puglia', label: 'Puglia (Bari)' },
+        { value: 'Toscana', label: 'Toscana (Firenze)' },
+        { value: 'Sicilia', label: 'Sicilia (Palermo)' },
+        { value: 'Sardegna', label: 'Sardegna (Cagliari)' },
+        { value: 'Liguria', label: 'Liguria (Genova)' },
+        { value: 'Marche', label: 'Marche (Ancona)' },
+        { value: 'Umbria', label: 'Umbria (Perugia)' },
+        { value: 'Calabria', label: 'Calabria (Catanzaro)' }
       ],
       'PT': [
         { value: 'Lisboa', label: 'Lisboa' },
         { value: 'Porto', label: 'Porto' },
         { value: 'Braga', label: 'Braga' },
         { value: 'Coimbra', label: 'Coimbra' },
-        { value: 'Faro', label: 'Faro' },
+        { value: 'Faro', label: 'Faro (Algarve)' },
         { value: 'Aveiro', label: 'Aveiro' },
-        { value: 'other', label: 'Other' }
+        { value: 'Évora', label: 'Évora' },
+        { value: 'Viseu', label: 'Viseu' },
+        { value: 'Setúbal', label: 'Setúbal' },
+        { value: 'Leiria', label: 'Leiria' }
       ],
       'DE': [
-        { value: 'Bayern', label: 'Bayern' },
-        { value: 'Baden-Württemberg', label: 'Baden-Württemberg' },
-        { value: 'Nordrhein-Westfalen', label: 'Nordrhein-Westfalen' },
-        { value: 'Hessen', label: 'Hessen' },
-        { value: 'Niedersachsen', label: 'Niedersachsen' },
+        { value: 'Bayern', label: 'Bayern (München)' },
+        { value: 'Baden-Württemberg', label: 'Baden-Württemberg (Stuttgart)' },
+        { value: 'Nordrhein-Westfalen', label: 'Nordrhein-Westfalen (Düsseldorf)' },
+        { value: 'Hessen', label: 'Hessen (Wiesbaden)' },
+        { value: 'Niedersachsen', label: 'Niedersachsen (Hannover)' },
         { value: 'Berlin', label: 'Berlin' },
         { value: 'Hamburg', label: 'Hamburg' },
-        { value: 'other', label: 'Other' }
+        { value: 'Sachsen', label: 'Sachsen (Dresden)' },
+        { value: 'Rheinland-Pfalz', label: 'Rheinland-Pfalz (Mainz)' }
       ],
       'NL': [
-        { value: 'Noord-Holland', label: 'Noord-Holland' },
-        { value: 'Zuid-Holland', label: 'Zuid-Holland' },
-        { value: 'Noord-Brabant', label: 'Noord-Brabant' },
+        { value: 'Noord-Holland', label: 'Noord-Holland (Amsterdam)' },
+        { value: 'Zuid-Holland', label: 'Zuid-Holland (Den Haag)' },
+        { value: 'Noord-Brabant', label: 'Noord-Brabant (Eindhoven)' },
         { value: 'Utrecht', label: 'Utrecht' },
-        { value: 'Gelderland', label: 'Gelderland' },
-        { value: 'other', label: 'Other' }
+        { value: 'Gelderland', label: 'Gelderland (Arnhem)' },
+        { value: 'Overijssel', label: 'Overijssel (Zwolle)' },
+        { value: 'Limburg', label: 'Limburg (Maastricht)' },
+        { value: 'Groningen', label: 'Groningen' }
       ],
       'BE': [
-        { value: 'Brussels', label: 'Brussels' },
-        { value: 'Antwerp', label: 'Antwerp' },
-        { value: 'East Flanders', label: 'East Flanders' },
-        { value: 'West Flanders', label: 'West Flanders' },
-        { value: 'Walloon Brabant', label: 'Walloon Brabant' },
-        { value: 'other', label: 'Other' }
+        { value: 'Brussels', label: 'Brussels-Capital' },
+        { value: 'Antwerp', label: 'Antwerp (Vlaanderen)' },
+        { value: 'East Flanders', label: 'East Flanders (Gent)' },
+        { value: 'West Flanders', label: 'West Flanders (Brugge)' },
+        { value: 'Walloon Brabant', label: 'Walloon Brabant (Wavre)' },
+        { value: 'Liège', label: 'Liège (Wallonia)' },
+        { value: 'Namur', label: 'Namur (Wallonia)' }
+      ],
+      'AT': [
+        { value: 'Vienna', label: 'Vienna (Wien)' },
+        { value: 'Lower Austria', label: 'Lower Austria (Niederösterreich)' },
+        { value: 'Upper Austria', label: 'Upper Austria (Oberösterreich)' },
+        { value: 'Salzburg', label: 'Salzburg' },
+        { value: 'Tyrol', label: 'Tyrol (Tirol)' },
+        { value: 'Styria', label: 'Styria (Steiermark)' },
+        { value: 'Carinthia', label: 'Carinthia (Kärnten)' }
+      ],
+      'CH': [
+        { value: 'Zürich', label: 'Zürich' },
+        { value: 'Geneva', label: 'Geneva (Genève)' },
+        { value: 'Basel', label: 'Basel' },
+        { value: 'Bern', label: 'Bern' },
+        { value: 'Vaud', label: 'Vaud (Lausanne)' },
+        { value: 'Ticino', label: 'Ticino (Bellinzona)' },
+        { value: 'Valais', label: 'Valais (Sion)' }
+      ],
+      'UK': [
+        { value: 'England', label: 'England' },
+        { value: 'Scotland', label: 'Scotland' },
+        { value: 'Wales', label: 'Wales' },
+        { value: 'Northern Ireland', label: 'Northern Ireland' }
+      ],
+      'IE': [
+        { value: 'Dublin', label: 'Dublin' },
+        { value: 'Cork', label: 'Cork' },
+        { value: 'Galway', label: 'Galway' },
+        { value: 'Limerick', label: 'Limerick' },
+        { value: 'Waterford', label: 'Waterford' }
       ]
     }
 
-    // Para países sin provincias específicas, usar región/estado genérico
+    // Para países sin provincias específicas definidas, usar valor genérico
     return provinces[country] || [
-      { value: 'region', label: 'Region/State' },
-      { value: 'other', label: 'Other' }
+      { value: 'region', label: 'Region/State' }
     ]
   }
 
@@ -157,19 +215,10 @@ const Checkout = () => {
       const newZone = detectShippingZone(value)
       setShippingZone(newZone)
       
-      // Resetear provincia cuando cambia el país
-      setFormData(prev => ({ 
-        ...prev, 
-        [name]: fieldValue,
-        province: '' // Resetear provincia
-      }))
-      
       // Si no es España, resetear a standard (pickup no disponible)
       if (newZone !== 'spain' && formData.shippingMethod === 'pickup') {
         setFormData(prev => ({ ...prev, shippingMethod: 'standard' }))
       }
-      
-      return // Salir temprano para evitar el setFormData de abajo
     }
     
     // Clear error when user starts typing
@@ -234,22 +283,9 @@ const Checkout = () => {
     setShowStripeCheckout(true)
   }
 
-  // Redireccionar si el carrito está vacío
-  useEffect(() => {
-    if (cartItems.length === 0) {
-      navigate('/shop')
-    }
-  }, [cartItems.length, navigate])
-
-  // Si el carrito está vacío, mostrar loading mientras redirige
   if (cartItems.length === 0) {
-    return (
-      <div className="min-h-screen pt-32 px-6 pb-20 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-lg">Redirecting to shop...</p>
-        </div>
-      </div>
-    )
+    navigate('/shop')
+    return null
   }
 
   return (
@@ -408,9 +444,17 @@ const Checkout = () => {
                         <option value="DE">Germany</option>
                         <option value="NL">Netherlands</option>
                         <option value="BE">Belgium</option>
+                        <option value="AT">Austria</option>
+                        <option value="CH">Switzerland</option>
                         <option value="UK">United Kingdom</option>
-                        <option value="US">United States</option>
-                        <option value="other">Other</option>
+                        <option value="IE">Ireland</option>
+                        <option value="NO">Norway</option>
+                        <option value="SE">Sweden</option>
+                        <option value="DK">Denmark</option>
+                        <option value="FI">Finland</option>
+                        <option value="PL">Poland</option>
+                        <option value="CZ">Czech Republic</option>
+                        <option value="GR">Greece</option>
                       </select>
                       {errors.country && (
                         <p className="text-red-500 text-xs mt-1">{errors.country}</p>
@@ -563,9 +607,10 @@ const Checkout = () => {
                         <div>
                           <p className="font-medium">Standard Shipping</p>
                           <p className="text-sm text-gray-600">
-                            {shippingZone === 'spain' && '3-5 business days'}
-                            {shippingZone === 'europe' && '5-7 business days'}
-                            {shippingZone === 'international' && '7-14 business days'}
+                            {shippingZone === 'spain' && '2-3 business days'}
+                            {shippingZone === 'europe-core' && '4-6 business days'}
+                            {shippingZone === 'europe-extended' && '5-8 business days'}
+                            {shippingZone === 'international' && '10-15 business days'}
                           </p>
                         </div>
                       </div>
@@ -585,9 +630,10 @@ const Checkout = () => {
                         <div>
                           <p className="font-medium">Express Shipping</p>
                           <p className="text-sm text-gray-600">
-                            {shippingZone === 'spain' && '1-2 business days'}
-                            {shippingZone === 'europe' && '2-3 business days'}
-                            {shippingZone === 'international' && '3-5 business days'}
+                            {shippingZone === 'spain' && '24-48h'}
+                            {shippingZone === 'europe-core' && '2-3 business days'}
+                            {shippingZone === 'europe-extended' && '3-5 business days'}
+                            {shippingZone === 'international' && '5-8 business days'}
                           </p>
                         </div>
                       </div>
@@ -648,7 +694,7 @@ const Checkout = () => {
                     <span>€{getCartTotal().toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Shipping ({shippingZone === 'spain' ? 'Spain' : shippingZone === 'europe' ? 'EU' : 'International'})</span>
+                    <span>Shipping ({shippingZone === 'spain' ? 'Spain' : shippingZone === 'europe-core' ? 'EU Core' : shippingZone === 'europe-extended' ? 'EU Extended' : 'International'})</span>
                     <span>
                       {formData.shippingMethod === 'pickup' 
                         ? 'FREE' 
