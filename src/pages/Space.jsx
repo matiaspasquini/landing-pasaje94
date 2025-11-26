@@ -72,7 +72,7 @@ const Space = () => {
       name: 'C 07 10 S1',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 85.00,
+      price: 94.00,
       image: brunoImg1,
       category: 'lighting'
     },
@@ -82,7 +82,7 @@ const Space = () => {
       name: 'C 07 10 S1 (alt)',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 85.00,
+      price: 94.00,
       image: brunoImg2,
       category: 'lighting'
     },
@@ -92,7 +92,7 @@ const Space = () => {
       name: 'C 07 10 S2',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 90.00,
+      price: 280.00,
       image: brunoImg3,
       category: 'lighting'
     },
@@ -102,7 +102,7 @@ const Space = () => {
       name: 'C 07 10 S2 (alt)',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 90.00,
+      price: 280.00,
       image: brunoImg4,
       category: 'lighting'
     },
@@ -112,7 +112,7 @@ const Space = () => {
       name: 'C 07 10 S3',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 95.00,
+      price: 188.00,
       image: brunoImg5,
       category: 'lighting'
     },
@@ -122,7 +122,7 @@ const Space = () => {
       name: 'C 07 10 S3 (alt)',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 95.00,
+      price: 188.00,
       image: brunoImg6,
       category: 'lighting'
     },
@@ -143,7 +143,7 @@ const Space = () => {
       name: 'BULTO 01 — Bone',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
-      price: 65.00,
+      price: 110.00,
       image: bamaImg1,
       category: 'ceramics'
     },
@@ -153,7 +153,7 @@ const Space = () => {
       name: 'BULTO 01 — Bordeaux',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
-      price: 65.00,
+      price: 110.00,
       image: bamaImg2,
       category: 'ceramics'
     },
@@ -163,7 +163,7 @@ const Space = () => {
       name: 'BULTO 01 — Cobalt',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
-      price: 65.00,
+      price: 110.00,
       image: bamaImg3,
       category: 'ceramics'
     },
@@ -173,7 +173,7 @@ const Space = () => {
       name: 'BULTO 02 — Bone',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
-      price: 75.00,
+      price: 110.00,
       image: bamaImg4,
       category: 'ceramics'
     },
@@ -183,7 +183,7 @@ const Space = () => {
       name: 'BULTO 02 — Bordeaux',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
-      price: 75.00,
+      price: 110.00,
       image: bamaImg5,
       category: 'ceramics'
     },
@@ -193,7 +193,7 @@ const Space = () => {
       name: 'BULTO 02 — Cobalt',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
-      price: 75.00,
+      price: 110.00,
       image: bamaImg6,
       category: 'ceramics'
     },
@@ -234,7 +234,7 @@ const Space = () => {
       name: 'BRICK Vase 04',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
-      price: 130.00,
+      price: 200.00,
       image: albertoImg3,
       category: 'objects'
     },
@@ -326,7 +326,7 @@ const Space = () => {
       name: 'Candleholder I',
       artist: t('giovName'),
       collection: t('giovCollection'),
-      price: 42.00,
+      price: 55.00,
       image: giovImg1,
       category: 'ceramics'
     },
@@ -336,7 +336,7 @@ const Space = () => {
       name: 'Candleholder II',
       artist: t('giovName'),
       collection: t('giovCollection'),
-      price: 42.00,
+      price: 55.00,
       image: giovImg2,
       category: 'ceramics'
     },
@@ -346,7 +346,7 @@ const Space = () => {
       name: 'Fake Lamp',
       artist: t('giovName'),
       collection: t('giovCollection'),
-      price: 85.00,
+      price: 160.00,
       image: giovImg3,
       category: 'lighting'
     },
@@ -356,7 +356,7 @@ const Space = () => {
       name: 'Candleholders Set',
       artist: t('giovName'),
       collection: t('giovCollection'),
-      price: 75.00,
+      price: 55.00,
       image: giovImg5,
       category: 'ceramics'
     },
