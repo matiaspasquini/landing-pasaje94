@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -42,9 +42,54 @@ import giovImg6 from '../assets/Giov/Pasaje 94 - Giov studio objects.JPG'
 
 const Space = () => {
   const containerRef = useRef(null)
+  const indexRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
   const { t } = useTranslation()
   const { addToCart } = useCart()
+  const [showIndex, setShowIndex] = useState(false)
+
+  // Efecto para cerrar el índice al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (indexRef.current && !indexRef.current.contains(event.target)) {
+        setShowIndex(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  // Función para navegar a un autor específico
+  const scrollToDesigner = (designerId) => {
+    const element = document.getElementById(designerId)
+    if (element && containerRef.current) {
+      const container = containerRef.current
+      const elementLeft = element.offsetLeft
+      const containerWidth = container.clientWidth
+      const elementWidth = element.clientWidth
+      
+      // Centrar el elemento en el viewport
+      const scrollPosition = elementLeft - (containerWidth / 2) + (elementWidth / 2)
+      
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      })
+    }
+    setShowIndex(false)
+  }
+
+  // Lista de autores para el índice
+  const designers = [
+    { id: 'bruno-intro', name: t('brunoMespuletName'), collection: t('brunoMespuletCollection') },
+    { id: 'bama-intro', name: t('bamaName'), collection: t('bamaCollection') },
+    { id: 'alberto-intro', name: t('albertoName'), collection: t('albertoCollection') },
+    { id: 'lod-intro', name: t('lodName'), collection: t('lodCollection') },
+    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection') }
+  ]
 
   // Crear estructura de productos individuales con intros de diseñadores
   const allItems = [
@@ -414,9 +459,43 @@ const Space = () => {
                     <h2 className="text-lg md:text-2xl lg:text-3xl tracking-wide font-light mb-8 md:mb-12 italic">
                       {item.subtitle}
                     </h2>
-                    <p className="text-sm md:text-lg leading-relaxed text-gray-700 max-w-3xl mx-auto">
+                    <p className="text-sm md:text-lg leading-relaxed text-gray-700 max-w-3xl mx-auto mb-8">
                       {item.description}
                     </p>
+                    
+                    {/* Botón del índice de autores */}
+                    <div ref={indexRef} className="relative">
+                      <button
+                        onClick={() => setShowIndex(!showIndex)}
+                        className="bg-black text-white px-6 py-3 text-sm tracking-wide hover:bg-gray-800 transition-colors"
+                      >
+                        {t('designersIndex')} {showIndex ? '−' : '+'}
+                      </button>
+                      
+                      {/* Dropdown del índice */}
+                      {showIndex && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 shadow-lg z-50 min-w-80"
+                        >
+                          <div className="py-4 px-6">
+                            <h3 className="text-sm tracking-wider text-gray-600 mb-4">SALTAR A:</h3>
+                            {designers.map((designer, index) => (
+                              <button
+                                key={designer.id}
+                                onClick={() => scrollToDesigner(designer.id)}
+                                className="block w-full text-left py-3 px-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                              >
+                                <div className="text-sm font-medium text-gray-900">{designer.name}</div>
+                                <div className="text-xs text-gray-500 mt-1">{designer.collection}</div>
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
                   </div>
                 </div>
               ) : item.type === 'designer-intro' ? (
