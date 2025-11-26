@@ -42,6 +42,7 @@ const Header = () => {
           style={{ paddingLeft: 'calc(7% - 6rem)' }}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
+          data-header-clickable="true"
         >
           {/* 1. Pasaje (Izquierda) - Se queda quieto gracias a tu paddingLeft */}
           <span className="text-3xl md:text-5xl tracking-tighter font-normal flex-shrink-0 text-black">

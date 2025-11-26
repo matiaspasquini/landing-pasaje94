@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 // Importar imágenes del slider principal
@@ -47,6 +47,15 @@ const Home = () => {
     }
   }, [])
 
+  // Función para manejar click global que active el header
+  const handleGlobalClick = () => {
+    // Buscar el elemento del header y simular click
+    const headerElement = document.querySelector('header [data-header-clickable]')
+    if (headerElement) {
+      headerElement.click()
+    }
+  }
+
   // Scroll horizontal acelerado con la rueda del mouse
   useEffect(() => {
     const container = scrollContainerRef.current
@@ -89,11 +98,18 @@ const Home = () => {
   ]
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden relative">
+      {/* Capa invisible para click global (solo visible cuando el menú está cerrado) */}
+      <div 
+        className="absolute inset-0 z-40 cursor-pointer"
+        onClick={handleGlobalClick}
+        style={{ pointerEvents: 'auto' }}
+      />
+      
       {/* Carrusel horizontal de pantalla completa */}
       <div
         ref={scrollContainerRef}
-        className="h-screen overflow-x-auto overflow-y-hidden scrollbar-hide"
+        className="h-screen overflow-x-auto overflow-y-hidden scrollbar-hide relative z-30"
       >
         <div className="flex h-full">
           {sliderImages.map((image, index) => (

@@ -51,7 +51,7 @@ const Space = () => {
     {
       id: 'intro',
       type: 'intro',
-      title: 'Holy——————————————————————————————————days',
+      title: 'Holy———————————————————————————————————————days',
       subtitle: t('spaceSubtitle'),
       description: t('spaceDescription')
     },
