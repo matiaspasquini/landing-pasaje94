@@ -494,13 +494,13 @@ const Space = () => {
                     </p>
                     <div className="bg-gray-50 p-4 rounded border">
                       <p className="text-sm font-medium mb-2 text-gray-800">
-                        {t('presaleOnly')}
+                        {t('checkout.presaleOnly')}
                       </p>
                       <p className="text-xs text-gray-600 mb-3">
-                        {t('presaleMessage')}
+                        {t('checkout.presaleMessage')}
                       </p>
                       <p className="text-xs text-gray-700 font-medium">
-                        📍 {t('visitStore')}: C/ dels Trinitaris, 13, Ciutat Vella, Valencia
+                        📍 {t('checkout.visitStore')}: C/ dels Trinitaris, 13, Ciutat Vella, Valencia
                       </p>
                     </div>
                   </div>
