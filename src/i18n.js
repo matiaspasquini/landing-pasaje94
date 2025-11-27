@@ -14,7 +14,7 @@ i18n
     resources,
     lng: 'es', // idioma por defecto cambiado a español
     fallbackLng: 'es', // fallback también en español
-    debug: true, // habilitar para debugging
+    debug: false, // desactivar debug para producción
     interpolation: {
       escapeValue: false,
     },
