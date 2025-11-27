@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useCart } from '../contexts/CartContext'
 import { useTranslation } from 'react-i18next'
 
 const Header = () => {
   const location = useLocation()
-  const { getCartCount, setIsCartOpen } = useCart()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t, i18n } = useTranslation()
 
@@ -17,8 +15,6 @@ const Header = () => {
     { name: t('menu'), path: '/menu' },
     { name: t('archive'), path: '/archive' },
   ]
-
-  const cartCount = getCartCount()
 
   // Cerrar menú cuando cambia la ruta
   useEffect(() => {
@@ -82,22 +78,6 @@ const Header = () => {
                     )}
                   </Link>
                 ))}
-                
-                {/* Cart */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setIsCartOpen(true)
-                  }}
-                  className="relative text-base md:text-lg tracking-wider hover:opacity-60 transition-opacity whitespace-nowrap font-medium"
-                >
-                  {t('cart')}
-                  {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                      {cartCount}
-                    </span>
-                  )}
-                </button>
                 
                 {/* ELIMINADO: Aquí estaba antes el 94 duplicado */}
               </motion.nav>

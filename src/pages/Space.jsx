@@ -1,8 +1,7 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import { useCart } from '../contexts/CartContext'
 
 // Importar imágenes de Bruno Mespulet
 import brunoImg1 from '../assets/Bruno Mespulet/C_0710_S1_I03.jpg'
@@ -44,7 +43,6 @@ const Space = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
   const { t } = useTranslation()
-  const { addToCart } = useCart()
 
   // Función para navegar a un autor específico
   const scrollToDesigner = (designerId) => {
@@ -491,15 +489,20 @@ const Space = () => {
                         {item.collection}
                       </p>
                     )}
-                    <p className="text-lg md:text-2xl font-medium mb-6 md:mb-8">
+                    <p className="text-lg md:text-2xl font-medium mb-4 md:mb-6">
                       €{item.price.toFixed(2)}
                     </p>
-                    <button 
-                      onClick={() => addToCart(item)}
-                      className="px-4 py-2 md:px-6 md:py-3 bg-black text-white hover:bg-gray-800 transition-colors w-fit text-xs md:text-base"
-                    >
-                      {t('addToCart')}
-                    </button>
+                    <div className="bg-gray-50 p-4 rounded border">
+                      <p className="text-sm font-medium mb-2 text-gray-800">
+                        {t('presaleOnly')}
+                      </p>
+                      <p className="text-xs text-gray-600 mb-3">
+                        {t('presaleMessage')}
+                      </p>
+                      <p className="text-xs text-gray-700 font-medium">
+                        📍 {t('visitStore')}: Pasaje 94, Madrid
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}
