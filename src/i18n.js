@@ -12,10 +12,14 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en', // idioma por defecto
-    fallbackLng: 'en',
+    lng: 'es', // idioma por defecto cambiado a español
+    fallbackLng: 'es', // fallback también en español
+    debug: true, // habilitar para debugging
     interpolation: {
       escapeValue: false,
+    },
+    react: {
+      useSuspense: false, // evitar problemas con suspense
     },
   });
 

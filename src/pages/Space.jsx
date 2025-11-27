@@ -42,7 +42,7 @@ import giovImg6 from '../assets/Giov/Pasaje 94 - Giov studio objects.JPG'
 const Space = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Función para navegar a un autor específico
   const scrollToDesigner = (designerId) => {
@@ -493,6 +493,10 @@ const Space = () => {
                       €{item.price.toFixed(2)}
                     </p>
                     <div className="bg-gray-50 p-4 rounded border">
+                      {/* DEBUG: Test de traducción */}
+                      <div className="text-xs text-red-500 mb-2">
+                        DEBUG: {t('about')} | Lang: {i18n.language} | PreOnly: {t('presaleOnly')}
+                      </div>
                       <p className="text-sm font-medium mb-2 text-gray-800">
                         {t('presaleOnly')}
                       </p>
