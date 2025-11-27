@@ -31,7 +31,8 @@ const Cart = () => {
                 <span className="text-lg">📍</span>
                 <div>
                   <p className="font-medium">Ubicación</p>
-                  <p className="text-gray-600">Pasaje 94, Madrid</p>
+                  <p className="text-gray-600">C/ dels Trinitaris, 13</p>
+                  <p className="text-gray-600">Ciutat Vella, Valencia</p>
                 </div>
               </div>
               

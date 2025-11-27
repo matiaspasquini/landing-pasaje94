@@ -127,7 +127,7 @@ const Space = () => {
       name: 'C 07 10 S1',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 94.00,
+      price: 84.00,
       image: brunoImg1,
       category: 'lighting'
     },
@@ -137,7 +137,7 @@ const Space = () => {
       name: 'C 07 10 S2',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 280.00,
+      price: 250.00,
       image: brunoImg3,
       category: 'lighting'
     },
@@ -147,7 +147,7 @@ const Space = () => {
       name: 'C 07 10 S3',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
-      price: 188.00,
+      price: 168.00,
       image: brunoImg5,
       category: 'lighting'
     },
@@ -500,7 +500,7 @@ const Space = () => {
                         {t('presaleMessage')}
                       </p>
                       <p className="text-xs text-gray-700 font-medium">
-                        📍 {t('visitStore')}: Pasaje 94, Madrid
+                        📍 {t('visitStore')}: C/ dels Trinitaris, 13, Ciutat Vella, Valencia
                       </p>
                     </div>
                   </div>
