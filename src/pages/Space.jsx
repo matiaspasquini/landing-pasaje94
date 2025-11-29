@@ -406,7 +406,7 @@ const Space = () => {
                   </div>
                 </div>
               ) : item.type === 'designers-index' ? (
-                <div className="w-full h-full flex items-center justify-center px-8">
+                <div className="w-full h-full flex items-start justify-center px-8 pt-12 md:pt-16">
                   <div className="text-left max-w-2xl">
                     {/* Título principal */}
                     <h1 className="text-3xl md:text-4xl lg:text-5xl tracking-tight font-light mb-12 md:mb-16 italic leading-tight">
@@ -449,7 +449,7 @@ const Space = () => {
                       {item.name}
                     </h1>
                     {item.collection && (
-                      <h2 className="text-lg md:text-2xl lg:text-3xl tracking-wide font-light mb-8 md:mb-12 italic text-gray-600">
+                      <h2 className="text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-8 md:mb-12 italic text-gray-600">
                         {item.collection}
                       </h2>
                     )}
