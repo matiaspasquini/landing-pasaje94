@@ -86,11 +86,11 @@ const Space = () => {
 
   // Lista de autores para el índice
   const designers = [
-    { id: 'bruno-intro', name: t('brunoMespuletName'), collection: t('brunoMespuletCollection') },
-    { id: 'bama-intro', name: t('bamaName'), collection: t('bamaCollection') },
-    { id: 'alberto-intro', name: t('albertoName'), collection: t('albertoCollection') },
-    { id: 'lod-intro', name: t('lodName'), collection: t('lodCollection') },
-    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection') }
+    { id: 'bruno-intro', name: t('brunoMespuletName'), collection: t('brunoMespuletCollection'), instagram: '@brunomespulet' },
+    { id: 'bama-intro', name: t('bamaName'), collection: t('bamaCollection'), instagram: '@bamaobjects' },
+    { id: 'alberto-intro', name: t('albertoName'), collection: t('albertoCollection'), instagram: '@albertoherrerosoler' },
+    { id: 'lod-intro', name: t('lodName'), collection: t('lodCollection'), instagram: '@losobjectosdecoratives' },
+    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection'), instagram: '@giovstudio_' }
   ]
 
   // Crear estructura de productos individuales con intros de diseñadores
@@ -236,27 +236,27 @@ const Space = () => {
     {
       id: 'alberto-1',
       type: 'product',
-      name: 'BRICK Vase 02',
+      name: 'BRICK 2x1',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
-      price: 120.00,
+      price: 80.00,
       image: albertoImg1,
       category: 'objects'
     },
     {
       id: 'alberto-2',
       type: 'product',
-      name: 'BRICK Vase 03',
+      name: 'BRICK 3x1',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
-      price: 125.00,
+      price: 12.00,
       image: albertoImg2,
       category: 'objects'
     },
     {
       id: 'alberto-3',
       type: 'product',
-      name: 'BRICK Vase 04',
+      name: 'BRICK 3x2',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
       price: 200.00,
@@ -277,7 +277,7 @@ const Space = () => {
     {
       id: 'lod-1',
       type: 'product',
-      name: 'LOD Object',
+      name: 'Waves Sculpture',
       artist: t('lodName'),
       collection: t('lodCollection'),
       price: 45.00,
@@ -406,43 +406,39 @@ const Space = () => {
                   </div>
                 </div>
               ) : item.type === 'designers-index' ? (
-                <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center px-4">
-                  <div className="text-center max-w-6xl w-full">
-                    <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-3 md:mb-6">
-                      {item.title}
+                <div className="w-full h-full flex items-center justify-center px-8">
+                  <div className="text-left max-w-2xl">
+                    {/* Título principal */}
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl tracking-tight font-light mb-12 md:mb-16 italic leading-tight">
+                      xmas boutique design market
                     </h1>
-                    <h2 className="text-base md:text-lg lg:text-xl tracking-wide font-light mb-8 md:mb-12 italic text-gray-600">
-                      {item.subtitle}
-                    </h2>
                     
-                    {/* Grid de diseñadores */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
+                    {/* Lista de diseñadores */}
+                    <div className="space-y-1 mb-16 md:mb-20">
+                      <p className="text-xl md:text-2xl font-medium mb-3">+</p>
                       {designers.map((designer, index) => (
                         <motion.button
                           key={designer.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: index * 0.1 }}
-                          whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
                           onClick={() => scrollToDesigner(designer.id)}
-                          className="group text-left p-4 sm:p-5 lg:p-6 border border-gray-200 hover:border-black transition-all duration-300 bg-white hover:shadow-lg w-full"
+                          className="block text-xl md:text-2xl lg:text-3xl font-bold tracking-tight hover:opacity-60 transition-opacity text-left"
                         >
-                          <div className="mb-3">
-                            <h3 className="text-base sm:text-lg lg:text-xl font-light tracking-tight text-gray-900 group-hover:text-black transition-colors">
-                              {designer.name}
-                            </h3>
-                            <div className="w-10 h-px bg-gray-300 group-hover:bg-black transition-colors mt-2"></div>
-                          </div>
-                          
-                          <p className="text-xs sm:text-sm lg:text-base text-gray-600 group-hover:text-gray-800 transition-colors leading-relaxed mb-3">
-                            {designer.collection}
-                          </p>
-                          
-                          <div className="text-xs tracking-wider text-gray-500 group-hover:text-gray-700 transition-colors">
-                            {t('viewCollection', 'VER COLECCIÓN')} →
-                          </div>
+                          {designer.instagram.replace('@', '')}
                         </motion.button>
                       ))}
+                    </div>
+                    
+                    {/* Texto indicador de click */}
+                    <p className="text-sm md:text-base font-light text-gray-500 italic mb-12 md:mb-16">
+                      click to view collection
+                    </p>
+                    
+                    {/* Años */}
+                    <div className="text-base md:text-lg font-light text-gray-700">
+                      <p>/ 2025</p>
+                      <p>/ 2026</p>
                     </div>
                   </div>
                 </div>
