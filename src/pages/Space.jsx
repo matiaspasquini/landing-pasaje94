@@ -20,9 +20,9 @@ import bamaImg5 from '../assets/BAMA/BULTO 02—Bordeaux—side 1.jpg'
 import bamaImg6 from '../assets/BAMA/BULTO 02—Cobalt—side 2.jpg'
 
 // Importar imágenes de Alberto Design
-import albertoImg1 from '../assets/Alberto Design/BRICK 2.jpg'
-import albertoImg2 from '../assets/Alberto Design/BRICK 3.jpg'
-import albertoImg3 from '../assets/Alberto Design/BRICK 4.jpg'
+import albertoImg1 from '../assets/Alberto Design/BRICK 2X1.jpg'
+import albertoImg2 from '../assets/Alberto Design/BRICK 3X1.jpg'
+import albertoImg3 from '../assets/Alberto Design/BRICK 3X2.jpg'
 import albertoImg4 from '../assets/Alberto Design/BRICK 5.jpg'
 
 // Importar imágenes de LOD
@@ -249,7 +249,7 @@ const Space = () => {
       name: 'BRICK 3x1',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
-      price: 12.00,
+      price: 120.00,
       image: albertoImg2,
       category: 'objects'
     },
