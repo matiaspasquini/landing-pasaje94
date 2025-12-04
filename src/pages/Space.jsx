@@ -125,17 +125,6 @@ const Space = () => {
       description: t('brunoMespuletDescription')
     },
     
-    // Producto de prueba (€0.50)
-    {
-      id: 'test-product',
-      type: 'product',
-      name: 'Producto de Prueba',
-      artist: 'Pasaje 94',
-      collection: 'Test Collection',
-      price: 0.50,
-      image: brunoImg1, // Usando imagen temporal
-      category: 'test'
-    },
     
     // Productos Bruno Mespulet
     {
