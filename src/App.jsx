@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { CartProvider } from './contexts/CartContext'
 import Header from './components/Header'
-import CartSidebar from './components/Cartsidebar'
+import CartSidebar from './components/CartSidebar'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
