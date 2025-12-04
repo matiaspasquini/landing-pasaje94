@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -44,7 +44,10 @@ const Space = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
   const { t } = useTranslation()
-  const { addToCart } = useCart()
+  const { addToCart, setIsCartOpen, getCartCount } = useCart()
+  
+  // Estado para manejar variantes seleccionadas (para productos con variantes)
+  const [selectedVariants, setSelectedVariants] = useState({})
 
   // Función para navegar a un autor específico
   const scrollToDesigner = (designerId) => {
@@ -138,7 +141,7 @@ const Space = () => {
     {
       id: 'bruno-1',
       type: 'product',
-      name: 'C 07 10 S1',
+      name: 'S1',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
       price: 84.00,
@@ -148,7 +151,7 @@ const Space = () => {
     {
       id: 'bruno-3',
       type: 'product',
-      name: 'C 07 10 S2',
+      name: 'S2',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
       price: 250.00,
@@ -158,7 +161,7 @@ const Space = () => {
     {
       id: 'bruno-5',
       type: 'product',
-      name: 'C 07 10 S3',
+      name: 'S3',
       artist: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
       price: 168.00,
@@ -175,66 +178,34 @@ const Space = () => {
       description: t('bamaDescription')
     },
     
-    // Productos BAMA
+    // Productos BAMA (con variantes de color)
     {
-      id: 'bama-1',
+      id: 'bama-bulto-01',
       type: 'product',
-      name: 'BULTO 01 — Bone',
+      name: '01',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
       price: 110.00,
-      image: bamaImg1,
-      category: 'ceramics'
+      category: 'ceramics',
+      variants: [
+        { color: 'Bone', image: bamaImg1, id: 'bama-1' },
+        { color: 'Bordeaux', image: bamaImg2, id: 'bama-2' },
+        { color: 'Cobalt', image: bamaImg3, id: 'bama-3' }
+      ]
     },
     {
-      id: 'bama-2',
+      id: 'bama-bulto-02',
       type: 'product',
-      name: 'BULTO 01 — Bordeaux',
+      name: '02',
       artist: t('bamaName'),
       collection: t('bamaCollection'),
       price: 110.00,
-      image: bamaImg2,
-      category: 'ceramics'
-    },
-    {
-      id: 'bama-3',
-      type: 'product',
-      name: 'BULTO 01 — Cobalt',
-      artist: t('bamaName'),
-      collection: t('bamaCollection'),
-      price: 110.00,
-      image: bamaImg3,
-      category: 'ceramics'
-    },
-    {
-      id: 'bama-4',
-      type: 'product',
-      name: 'BULTO 02 — Bone',
-      artist: t('bamaName'),
-      collection: t('bamaCollection'),
-      price: 110.00,
-      image: bamaImg4,
-      category: 'ceramics'
-    },
-    {
-      id: 'bama-5',
-      type: 'product',
-      name: 'BULTO 02 — Bordeaux',
-      artist: t('bamaName'),
-      collection: t('bamaCollection'),
-      price: 110.00,
-      image: bamaImg5,
-      category: 'ceramics'
-    },
-    {
-      id: 'bama-6',
-      type: 'product',
-      name: 'BULTO 02 — Cobalt',
-      artist: t('bamaName'),
-      collection: t('bamaCollection'),
-      price: 110.00,
-      image: bamaImg6,
-      category: 'ceramics'
+      category: 'ceramics',
+      variants: [
+        { color: 'Bone', image: bamaImg4, id: 'bama-4' },
+        { color: 'Bordeaux', image: bamaImg5, id: 'bama-5' },
+        { color: 'Cobalt', image: bamaImg6, id: 'bama-6' }
+      ]
     },
     
     // Intro Alberto Design
@@ -250,7 +221,7 @@ const Space = () => {
     {
       id: 'alberto-1',
       type: 'product',
-      name: 'BRICK 2x1',
+      name: '2x1',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
       price: 80.00,
@@ -260,7 +231,7 @@ const Space = () => {
     {
       id: 'alberto-2',
       type: 'product',
-      name: 'BRICK 3x1',
+      name: '3x1',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
       price: 120.00,
@@ -270,7 +241,7 @@ const Space = () => {
     {
       id: 'alberto-3',
       type: 'product',
-      name: 'BRICK 3x2',
+      name: '3x2',
       artist: t('albertoDesignName'),
       collection: t('albertoDesignCollection'),
       price: 200.00,
@@ -382,7 +353,30 @@ const Space = () => {
           >
             Pasaje
           </Link>
-          <span className="text-3xl md:text-5xl tracking-tighter font-normal">94</span>
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative group cursor-pointer"
+          >
+            <span className="text-3xl md:text-5xl tracking-tighter font-normal">94</span>
+            {/* Ícono de carrito superpuesto */}
+            <span 
+              className="absolute -top-1 -right-2 text-xl opacity-60 group-hover:opacity-100 transition-opacity"
+              style={{ pointerEvents: 'none' }}
+            >
+              🛒
+            </span>
+            {/* Badge contador */}
+            {getCartCount() > 0 && (
+              <motion.span
+                className="absolute -top-2 -right-4 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 15 }}
+              >
+                {getCartCount()}
+              </motion.span>
+            )}
+          </button>
         </div>
       </div>
 
@@ -459,15 +453,15 @@ const Space = () => {
               ) : item.type === 'designer-intro' ? (
                 <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-center">
                   <div className="text-center max-w-4xl">
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-4 md:mb-6">
+                    <h1 className="text-2xl md:text-4xl lg:text-5xl tracking-tighter font-light mb-4 md:mb-6">
                       {item.name}
                     </h1>
                     {item.collection && (
-                      <h2 className="text-3xl md:text-5xl lg:text-6xl tracking-tighter font-light mb-8 md:mb-12 italic text-gray-600">
+                      <h2 className="text-2xl md:text-4xl lg:text-5xl tracking-tighter font-light mb-8 md:mb-12 italic text-gray-600">
                         {item.collection}
                       </h2>
                     )}
-                    <p className="text-sm md:text-base leading-relaxed text-gray-700 max-w-3xl mx-auto">
+                    <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-700 max-w-3xl mx-auto">
                       {item.description}
                     </p>
                   </div>
@@ -477,7 +471,9 @@ const Space = () => {
                   {/* Product Image */}
                   <div className="aspect-square bg-gray-100">
                     <img
-                      src={item.image}
+                      src={item.variants 
+                        ? item.variants[selectedVariants[item.id] || 0].image 
+                        : item.image}
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />
@@ -485,31 +481,71 @@ const Space = () => {
 
                   {/* Product Info */}
                   <div className="flex flex-col justify-start md:justify-center">
-                    <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-1 md:mb-2">
+                    <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-2 md:mb-3">
                       PRODUCT
                     </p>
-                    <h2 className="text-2xl md:text-4xl tracking-tighter font-light mb-2 md:mb-4 leading-none">
-                      {item.name}
-                    </h2>
-                    <p className="text-sm md:text-lg mb-2 md:mb-4 leading-tight">
+                    {/* Diseñador - Normal */}
+                    <p className="text-base md:text-lg mb-1 leading-none font-normal">
                       {item.artist}
                     </p>
+                    {/* Colección - Itálica */}
                     {item.collection && (
-                      <p className="text-sm md:text-base mb-4 md:mb-6 leading-tight italic text-gray-600">
+                      <p className="text-base md:text-lg mb-1 leading-none italic text-gray-700">
                         {item.collection}
                       </p>
                     )}
+                    {/* Nombre del Producto - Bold */}
+                    <h2 className="text-base md:text-lg mb-4 md:mb-6 leading-none font-bold">
+                      {item.name}
+                    </h2>
+
+                    {/* Color Selector - Only for products with variants */}
+                    {item.variants && (
+                      <div className="mb-4 md:mb-6">
+                        <p className="text-xs md:text-sm tracking-wider text-gray-600 mb-2">
+                          COLOR
+                        </p>
+                        <div className="flex gap-2">
+                          {item.variants.map((variant, index) => (
+                            <button
+                              key={variant.id}
+                              onClick={() => setSelectedVariants({
+                                ...selectedVariants,
+                                [item.id]: index
+                              })}
+                              className={`px-4 py-2 text-sm border transition-colors ${
+                                (selectedVariants[item.id] || 0) === index
+                                  ? 'bg-black text-white border-black'
+                                  : 'bg-white text-black border-gray-300 hover:border-black'
+                              }`}
+                            >
+                              {variant.color}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <p className="text-lg md:text-2xl font-medium mb-4 md:mb-6">
                       €{item.price.toFixed(2)}
                     </p>
                     <button
-                      onClick={() => addToCart({
-                        id: item.id,
-                        name: item.name,
-                        price: item.price,
-                        image: item.image,
-                        designer: item.artist
-                      })}
+                      onClick={() => {
+                        const selectedVariantIndex = selectedVariants[item.id] || 0;
+                        const selectedVariant = item.variants 
+                          ? item.variants[selectedVariantIndex]
+                          : null;
+                        
+                        addToCart({
+                          id: selectedVariant ? selectedVariant.id : item.id,
+                          name: selectedVariant 
+                            ? `${item.name} — ${selectedVariant.color}`
+                            : item.name,
+                          price: item.price,
+                          image: selectedVariant ? selectedVariant.image : item.image,
+                          designer: item.artist
+                        });
+                      }}
                       className="w-full px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors text-sm tracking-wider"
                     >
                       {t('checkout.addToCart')}

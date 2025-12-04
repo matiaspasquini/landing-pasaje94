@@ -289,29 +289,29 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen pt-32 px-6 pb-20">
-      <div className="max-w-screen-xl mx-auto">
+    <div className="min-h-screen pt-20 md:pt-24 px-4 md:px-6 pb-16">
+      <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-5xl tracking-tighter font-light mb-12">{t('checkout.title')}</h1>
+          <h1 className="text-3xl md:text-4xl tracking-tight font-light mb-8 md:mb-10">{t('checkout.title')}</h1>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
             {/* Form */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Contact Information */}
                 <div>
-                  <h2 className="text-2xl tracking-tighter font-light mb-6">
+                  <h2 className="text-xl md:text-2xl tracking-tight font-light mb-5">
                     {t('checkout.contactInformation')}
                   </h2>
                   
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.firstName')}
                         </label>
                         <input
@@ -319,9 +319,9 @@ const Checkout = () => {
                           name="firstName"
                           value={formData.firstName}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.firstName ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                          className={`w-full border-b ${
+                            errors.firstName ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                           placeholder={t('checkout.firstName')}
                         />
                         {errors.firstName && (
@@ -330,7 +330,7 @@ const Checkout = () => {
                       </div>
 
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.lastName')}
                         </label>
                         <input
@@ -338,9 +338,9 @@ const Checkout = () => {
                           name="lastName"
                           value={formData.lastName}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.lastName ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                          className={`w-full border-b ${
+                            errors.lastName ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                           placeholder={t('checkout.lastName')}
                         />
                         {errors.lastName && (
@@ -350,7 +350,7 @@ const Checkout = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm tracking-wider mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                         {t('checkout.company')}
                       </label>
                       <input
@@ -358,14 +358,14 @@ const Checkout = () => {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full border border-black p-3 focus:outline-none focus:ring-1 focus:ring-black"
+                        className="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent"
                         placeholder={t('checkout.company')}
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.email')}
                         </label>
                         <input
@@ -373,9 +373,9 @@ const Checkout = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.email ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                          className={`w-full border-b ${
+                            errors.email ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                         />
                         {errors.email && (
                           <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -383,7 +383,7 @@ const Checkout = () => {
                       </div>
 
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.phone')}
                         </label>
                         <input
@@ -391,9 +391,9 @@ const Checkout = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.phone ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                          className={`w-full border-b ${
+                            errors.phone ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                         />
                         {errors.phone && (
                           <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
@@ -402,16 +402,16 @@ const Checkout = () => {
                     </div>
 
                     {/* Newsletter checkbox */}
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-2 pt-2">
                       <input
                         type="checkbox"
                         id="newsletter"
                         name="newsletter"
                         checked={formData.newsletter}
                         onChange={handleChange}
-                        className="w-4 h-4 border border-black focus:ring-1 focus:ring-black"
+                        className="w-3.5 h-3.5 border border-gray-400 focus:ring-1 focus:ring-black"
                       />
-                      <label htmlFor="newsletter" className="text-sm tracking-wider">
+                      <label htmlFor="newsletter" className="text-xs text-gray-700">
                         {t('checkout.newsletter')}
                       </label>
                     </div>
@@ -419,23 +419,23 @@ const Checkout = () => {
                 </div>
 
                 {/* Shipping Address */}
-                <div className="border-t border-gray-200 pt-6">
-                  <h2 className="text-2xl tracking-tighter font-light mb-6">
+                <div className="border-t border-gray-200 pt-8">
+                  <h2 className="text-xl md:text-2xl tracking-tight font-light mb-5">
                     {t('checkout.delivery')}
                   </h2>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div>
-                      <label className="block text-sm tracking-wider mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                         {t('checkout.countryRegion')}
                       </label>
                       <select
                         name="country"
                         value={formData.country}
                         onChange={handleChange}
-                        className={`w-full border ${
-                          errors.country ? 'border-red-500' : 'border-black'
-                        } p-3 focus:outline-none focus:ring-1 focus:ring-black bg-white`}
+                        className={`w-full border-b ${
+                          errors.country ? 'border-red-500' : 'border-gray-300'
+                        } px-0 py-2 text-sm focus:outline-none focus:border-black bg-transparent`}
                       >
                         <option value="ES">Spain</option>
                         <option value="FR">France</option>
@@ -462,7 +462,7 @@ const Checkout = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm tracking-wider mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                         {t('checkout.address')}
                       </label>
                       <input
@@ -470,9 +470,9 @@ const Checkout = () => {
                         name="address"
                         value={formData.address}
                         onChange={handleChange}
-                        className={`w-full border ${
-                          errors.address ? 'border-red-500' : 'border-black'
-                        } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                        className={`w-full border-b ${
+                          errors.address ? 'border-red-500' : 'border-gray-300'
+                        } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                         placeholder={t('checkout.address')}
                       />
                       {errors.address && (
@@ -481,7 +481,7 @@ const Checkout = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm tracking-wider mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                         {t('checkout.apartment')}
                       </label>
                       <input
@@ -489,14 +489,14 @@ const Checkout = () => {
                         name="apartment"
                         value={formData.apartment}
                         onChange={handleChange}
-                        className="w-full border border-black p-3 focus:outline-none focus:ring-1 focus:ring-black"
+                        className="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent"
                         placeholder={t('checkout.apartment')}
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.postalCode')}
                         </label>
                         <input
@@ -504,9 +504,9 @@ const Checkout = () => {
                           name="postalCode"
                           value={formData.postalCode}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.postalCode ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                          className={`w-full border-b ${
+                            errors.postalCode ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                           placeholder={t('checkout.postalCode')}
                         />
                         {errors.postalCode && (
@@ -515,7 +515,7 @@ const Checkout = () => {
                       </div>
 
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.city')}
                         </label>
                         <input
@@ -523,9 +523,9 @@ const Checkout = () => {
                           name="city"
                           value={formData.city}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.city ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black`}
+                          className={`w-full border-b ${
+                            errors.city ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black transition-colors bg-transparent`}
                           placeholder={t('checkout.city')}
                         />
                         {errors.city && (
@@ -534,16 +534,16 @@ const Checkout = () => {
                       </div>
 
                       <div>
-                        <label className="block text-sm tracking-wider mb-2">
+                        <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                           {t('checkout.province')}
                         </label>
                         <select
                           name="province"
                           value={formData.province}
                           onChange={handleChange}
-                          className={`w-full border ${
-                            errors.province ? 'border-red-500' : 'border-black'
-                          } p-3 focus:outline-none focus:ring-1 focus:ring-black bg-white`}
+                          className={`w-full border-b ${
+                            errors.province ? 'border-red-500' : 'border-gray-300'
+                          } px-0 py-2 text-sm focus:outline-none focus:border-black bg-transparent`}
                         >
                           <option value="">{t('checkout.selectProvince')}</option>
                           {getProvincesByCountry(formData.country).map((province) => (
@@ -559,28 +559,21 @@ const Checkout = () => {
                     </div>
 
                     {/* B2B Customer Notice */}
-                    <div className="bg-gray-100 p-4 rounded border flex items-start space-x-3">
-                      <div className="flex-shrink-0 mt-0.5">
-                        <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div className="text-sm text-gray-700">
-                        <p className="font-medium mb-1">{t('checkout.b2bNoticeTitle')}</p>
-                        <p>{t('checkout.b2bNoticeText')}</p>
-                      </div>
+                    <div className="bg-gray-50 p-3 text-xs text-gray-600 border-l-2 border-gray-300">
+                      <p className="font-medium mb-1">{t('checkout.b2bNoticeTitle')}</p>
+                      <p>{t('checkout.b2bNoticeText')}</p>
                     </div>
 
                     <div>
-                      <label className="block text-sm tracking-wider mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-gray-600 mb-1.5">
                         {t('checkout.additionalNotes')}
                       </label>
                       <textarea
                         name="notes"
                         value={formData.notes}
                         onChange={handleChange}
-                        rows="4"
-                        className="w-full border border-black p-3 focus:outline-none focus:ring-1 focus:ring-black resize-none"
+                        rows="3"
+                        className="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-black resize-none bg-transparent"
                         placeholder="Special instructions or comments..."
                       />
                     </div>
@@ -588,13 +581,13 @@ const Checkout = () => {
                 </div>
 
                 {/* Shipping Method */}
-                <div>
-                  <h2 className="text-2xl tracking-tighter font-light mb-6">
+                <div className="border-t border-gray-200 pt-8">
+                  <h2 className="text-xl md:text-2xl tracking-tight font-light mb-5">
                     {t('checkout.shippingMethod')}
                   </h2>
                   
-                  <div className="space-y-3">
-                    <label className="flex items-center justify-between p-4 border border-black cursor-pointer hover:bg-gray-50">
+                  <div className="space-y-2">
+                    <label className="flex items-center justify-between p-3 border border-gray-300 cursor-pointer hover:border-black transition-colors">
                       <div className="flex items-center">
                         <input
                           type="radio"
@@ -664,9 +657,9 @@ const Checkout = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-black text-white hover:bg-gray-800 transition-colors text-sm tracking-wider"
+                  className="w-full py-2.5 bg-black text-white hover:bg-gray-800 transition-colors text-xs uppercase tracking-widest font-medium"
                 >
-                  PROCEED TO PAYMENT
+                  Proceed to Payment
                 </button>
               </form>
             </div>
@@ -674,35 +667,35 @@ const Checkout = () => {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="border border-black p-6 sticky top-32">
-                <h2 className="text-2xl tracking-tighter font-light mb-6">ORDER SUMMARY</h2>
+                <h2 className="text-lg md:text-xl tracking-tight font-light mb-5 uppercase text-xs tracking-wider text-gray-600">Order Summary</h2>
                 
-                <div className="space-y-4 mb-6">
+                <div className="space-y-3 mb-5">
                   {cartItems.map((item) => (
-                    <div key={item.id} className="flex justify-between text-sm">
+                    <div key={item.id} className="flex justify-between text-xs">
                       <div>
-                        <p className="font-light">{item.name}</p>
-                        <p className="text-gray-600 text-xs">Qty: {item.quantity}</p>
+                        <p className="font-normal text-sm">{item.name}</p>
+                        <p className="text-gray-500 text-xs">Qty: {item.quantity}</p>
                       </div>
-                      <p>€{(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="text-sm">€{(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   ))}
                 </div>
 
-                <div className="border-t border-gray-300 pt-4 space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Subtotal</span>
-                    <span>€{getCartTotal().toFixed(2)}</span>
+                <div className="border-t border-gray-200 pt-3 space-y-2 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Subtotal</span>
+                    <span className="font-medium">€{getCartTotal().toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Shipping ({shippingZone === 'spain' ? 'Spain' : shippingZone === 'europe-core' ? 'EU Core' : shippingZone === 'europe-extended' ? 'EU Extended' : 'International'})</span>
-                    <span>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Shipping ({shippingZone === 'spain' ? 'Spain' : shippingZone === 'europe-core' ? 'EU Core' : shippingZone === 'europe-extended' ? 'EU Extended' : 'International'})</span>
+                    <span className="font-medium">
                       {formData.shippingMethod === 'pickup' 
                         ? t('free') 
                         : `€${shippingCosts[shippingZone][formData.shippingMethod].toFixed(2)}`}
                     </span>
                   </div>
-                  <div className="flex justify-between text-lg font-medium pt-2 border-t border-gray-300">
-                    <span className="tracking-wider">TOTAL</span>
+                  <div className="flex justify-between text-sm font-medium pt-3 border-t border-gray-200">
+                    <span className="tracking-wider uppercase">Total</span>
                     <span>€{(getCartTotal() + shippingCosts[shippingZone][formData.shippingMethod]).toFixed(2)}</span>
                   </div>
                   <p className="text-xs text-gray-600 pt-2">

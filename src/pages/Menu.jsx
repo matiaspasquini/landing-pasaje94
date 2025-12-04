@@ -2,32 +2,32 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
+// Importar imágenes de café
+import cafeImg1 from '../assets/Cafe/WhatsApp Image 2025-12-01 at 19.37.35.jpeg'
+import cafeImg2 from '../assets/Cafe/WhatsApp Image 2025-12-01at 19.37.35.jpeg'
+import cafeImg3 from '../assets/Cafe/WhatsApp Image 2025-1201 at 19.37.38.jpeg'
+import cafeImg4 from '../assets/Cafe/WhatsApp Imag2025-12-01 at 19.37.41.jpeg'
+import cafeImg5 from '../assets/Cafe/WhatsApp Image 202-12-01 at 19.37.41.jpeg'
+import cafeImg6 from '../assets/Cafe/WhatsAppImage 2025-12-01 at 19.38.48.jpeg'
+
+// Importar logos
+import logoFoc from '../assets/Cafe/Logo - Foc.jpg'
+import logoMolt from '../assets/Cafe/Logo - Molt.jpg'
+
 const Menu = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  // Productos de café
-  const coffeeProducts = [
-    { name: t('coffeeProducts.espresso'), price: '2.50' },
-    { name: t('coffeeProducts.cortado'), price: '2.80' },
-    { name: t('coffeeProducts.cafeConLeche'), price: '3.20' },
-    { name: t('coffeeProducts.cappuccino'), price: '3.50' },
-    { name: t('coffeeProducts.flatWhite'), price: '3.80' },
-    { name: t('coffeeProducts.v60Filter'), price: '4.50' },
-    { name: t('coffeeProducts.chemex'), price: '5.00' },
-    { name: t('coffeeProducts.coldBrew'), price: '4.20' },
-  ]
-
-  // Productos de comida
-  const foodProducts = [
-    { name: t('foodProducts.tostadaAguacate'), price: '6.50' },
-    { name: t('foodProducts.croissantNatural'), price: '2.80' },
-    { name: t('foodProducts.croissantAlmendra'), price: '3.20' },
-    { name: t('foodProducts.tartaDelDia'), price: '4.50' },
-    { name: t('foodProducts.bananaBread'), price: '3.80' },
-    { name: t('foodProducts.ensaladaTemporada'), price: '8.50' },
-    { name: t('foodProducts.sandwichVegetal'), price: '7.20' },
-    { name: t('foodProducts.bagelSalmon'), price: '9.50' },
+  // Imagen principal (personas) - asumo que es la primera
+  const mainImage = cafeImg6
+  
+  // Resto de imágenes para la galería alternativa
+  const galleryImages = [
+    cafeImg1,
+    cafeImg2,
+    cafeImg3,
+    cafeImg4,
+    cafeImg5
   ]
 
   return (
@@ -65,89 +65,144 @@ const Menu = () => {
           </div>
         </motion.div>
 
-        {/* Section 2: Proveedor FOC - Café */}
+        {/* Section 2: Imagen de personas + Logos FOC y MOLT */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="min-w-full h-screen flex flex-col justify-center px-6 md:px-16 snap-start py-20 md:py-0"
+          className="min-w-full h-screen flex items-center justify-center px-6 md:px-12 snap-start"
         >
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-7xl tracking-tighter font-light mb-3 md:mb-6 italic leading-none">
-              {t('focTitle')}
-            </h2>
-            <p className="text-sm md:text-xl leading-tight mb-6 md:mb-12 text-gray-600">
-              {t('focDescription')}
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 w-full max-w-7xl items-center">
+            {/* Imagen principal */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="aspect-[4/5] overflow-hidden bg-gray-100"
+            >
+              <img
+                src={mainImage}
+                alt="Nuestro equipo"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
 
-            {/* Coffee Menu */}
-            <div className="grid grid-cols-2 gap-x-4 md:gap-x-12 gap-y-2 md:gap-y-4">
-              {coffeeProducts.map((product, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-baseline border-b border-gray-200 pb-1 md:pb-2"
-                >
-                  <span className="text-xs md:text-lg tracking-tight truncate pr-2">{product.name}</span>
-                  <span className="text-xs md:text-lg font-light whitespace-nowrap">€{product.price}</span>
+            {/* Logos y texto */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col justify-center space-y-8 md:space-y-12"
+            >
+              <div>
+                <h2 className="text-3xl md:text-5xl tracking-tighter font-light mb-4 md:mb-6 italic">
+                  {t('ourProvidersTitle', 'Nuestros Proveedores')}
+                </h2>
+                <p className="text-base md:text-xl leading-relaxed text-gray-700">
+                  {t('ourProvidersDescription', 'Trabajamos con los mejores artesanos locales para ofrecerte una experiencia única.')}
+                </p>
+              </div>
+
+              {/* Logo FOC */}
+              <div className="space-y-3">
+                <div className="w-32 md:w-40">
+                  <img src={logoFoc} alt="FOC Coffee" className="w-full h-auto object-contain" />
                 </div>
-              ))}
-            </div>
+                <p className="text-sm md:text-base text-gray-600">
+                  {t('focDescription', 'Café de especialidad')}
+                </p>
+              </div>
+
+              {/* Logo MOLT */}
+              <div className="space-y-3">
+                <div className="w-32 md:w-40">
+                  <img src={logoMolt} alt="MOLT" className="w-full h-auto object-contain" />
+                </div>
+                <p className="text-sm md:text-base text-gray-600">
+                  {t('moltDescription', 'Productos artesanales')}
+                </p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* Section 3: Proveedor de Comida (placeholder) */}
+        {/* Section 3: Galería tipo mosaico asimétrico */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="min-w-full h-screen flex flex-col justify-center px-6 md:px-16 snap-start py-20 md:py-0"
+          className="min-w-full h-screen flex items-center justify-center px-6 md:px-12 snap-start"
         >
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-7xl tracking-tighter font-light mb-3 md:mb-6 italic leading-none">
-              {t('artisanalProductsTitle')}
-            </h2>
-            <p className="text-sm md:text-xl leading-tight mb-6 md:mb-12 text-gray-600">
-              {t('artisanalProductsDescription')}
-            </p>
+          <div className="w-full max-w-7xl h-[85vh] grid grid-cols-4 grid-rows-4 gap-3 md:gap-4">
+            {/* Imagen 1 - Grande izquierda */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="col-span-2 row-span-2 overflow-hidden bg-gray-100"
+            >
+              <img
+                src={galleryImages[0]}
+                alt="Café 1"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
 
-            {/* Food Menu */}
-            <div className="grid grid-cols-2 gap-x-4 md:gap-x-12 gap-y-2 md:gap-y-4">
-              {foodProducts.map((product, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-baseline border-b border-gray-200 pb-1 md:pb-2"
-                >
-                  <span className="text-xs md:text-lg tracking-tight truncate pr-2">{product.name}</span>
-                  <span className="text-xs md:text-lg font-light whitespace-nowrap">€{product.price}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+            {/* Imagen 2 - Pequeña arriba derecha */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="col-span-2 row-span-1 overflow-hidden bg-gray-100"
+            >
+              <img
+                src={galleryImages[1]}
+                alt="Café 2"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
 
-        {/* Section 4: Info adicional / QR Code */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="min-w-full h-screen flex flex-col justify-center items-center px-6 md:px-16 snap-start"
-        >
-          <div className="max-w-xl text-center">
-            <h2 className="text-4xl md:text-7xl tracking-tighter font-light mb-4 md:mb-8 italic leading-none">
-              {t('digitalMenuTitle')}
-            </h2>
-            <p className="text-sm md:text-xl leading-tight mb-6 md:mb-12 text-gray-600">
-              {t('digitalMenuDescription')}
-            </p>
-            
-            {/* Placeholder para QR Code */}
-            <div className="w-48 h-48 md:w-64 md:h-64 mx-auto border-2 border-black flex items-center justify-center">
-              <span className="text-xs md:text-sm text-gray-400">QR Code</span>
-            </div>
-            
-            <p className="text-xs md:text-sm text-gray-500 mt-6 md:mt-8">
-              También puedes consultar el menú en pasaje94.com/menu
-            </p>
+            {/* Imagen 3 - Media derecha */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="col-span-1 row-span-2 overflow-hidden bg-gray-100"
+            >
+              <img
+                src={galleryImages[2]}
+                alt="Café 3"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
+
+            {/* Imagen 4 - Media derecha abajo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="col-span-1 row-span-2 overflow-hidden bg-gray-100"
+            >
+              <img
+                src={galleryImages[3]}
+                alt="Café 4"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
+
+            {/* Imagen 5 - Grande abajo izquierda */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="col-span-2 row-span-2 overflow-hidden bg-gray-100"
+            >
+              <img
+                src={galleryImages[4]}
+                alt="Café 5"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
           </div>
         </motion.div>
 
