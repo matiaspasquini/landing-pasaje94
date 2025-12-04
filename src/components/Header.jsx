@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { useCart } from '../contexts/CartContext'
 
 const Header = () => {
   const location = useLocation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t, i18n } = useTranslation()
+  const { getCartCount } = useCart()
 
   const navItems = [
     { name: t('about'), path: '/about' },
@@ -78,6 +80,19 @@ const Header = () => {
                     )}
                   </Link>
                 ))}
+                
+                {/* Botón del carrito */}
+                <Link
+                  to="/cart"
+                  className="relative text-base md:text-lg tracking-wider hover:opacity-60 transition-opacity whitespace-nowrap font-medium flex items-center gap-2"
+                >
+                  {t('cart')}
+                  {getCartCount() > 0 && (
+                    <span className="bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {getCartCount()}
+                    </span>
+                  )}
+                </Link>
                 
                 {/* ELIMINADO: Aquí estaba antes el 94 duplicado */}
               </motion.nav>

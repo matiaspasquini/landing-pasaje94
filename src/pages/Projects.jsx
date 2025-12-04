@@ -6,7 +6,7 @@ import { mockProjects } from '../utils/mockData'
 
 // Importar imágenes
 import pasajeFachadaImg from '../assets/About/Pasaje 94 Fachada.jpg'
-import galleryImg from '../assets/Projects/IMG_3812.jpg'
+import galleryImg from '../assets/Projects/gallery.jpeg'
 
 const Projects = () => {
   const containerRef = useRef(null)

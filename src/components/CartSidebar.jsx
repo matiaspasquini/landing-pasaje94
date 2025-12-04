@@ -125,7 +125,7 @@ const CartSidebar = () => {
                   onClick={handleCheckout}
                   className="w-full py-3 bg-black text-white hover:bg-gray-800 transition-colors tracking-wider text-sm"
                 >
-                  {t('checkoutButton')}
+                  {t('checkout.checkoutButton')}
                 </button>
               </div>
             )}

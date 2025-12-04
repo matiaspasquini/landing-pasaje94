@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { useCart } from '../contexts/CartContext'
 
 // Importar imágenes de Bruno Mespulet
 import brunoImg1 from '../assets/Bruno Mespulet/C_0710_S1_I03.jpg'
@@ -43,6 +44,7 @@ const Space = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
   const { t } = useTranslation()
+  const { addToCart } = useCart()
 
   // Función para navegar a un autor específico
   const scrollToDesigner = (designerId) => {
@@ -118,6 +120,18 @@ const Space = () => {
       name: t('brunoMespuletName'),
       collection: t('brunoMespuletCollection'),
       description: t('brunoMespuletDescription')
+    },
+    
+    // Producto de prueba (€0.50)
+    {
+      id: 'test-product',
+      type: 'product',
+      name: 'Producto de Prueba',
+      artist: 'Pasaje 94',
+      collection: 'Test Collection',
+      price: 0.50,
+      image: brunoImg1, // Usando imagen temporal
+      category: 'test'
     },
     
     // Productos Bruno Mespulet
@@ -317,10 +331,10 @@ const Space = () => {
     {
       id: 'lod-5',
       type: 'product',
-      name: 'Tableware Glass',
+      name: 'Tableware Collection',
       artist: t('lodName'),
-      collection: t('lodCollection'),
-      price: 32.00,
+      collection: 'Pichet Set',
+      price: 85.00,
       image: lodImg5,
       category: 'objects'
     },
@@ -488,17 +502,18 @@ const Space = () => {
                     <p className="text-lg md:text-2xl font-medium mb-4 md:mb-6">
                       €{item.price.toFixed(2)}
                     </p>
-                    <div className="bg-gray-50 p-4 rounded border">
-                      <p className="text-sm font-medium mb-2 text-gray-800">
-                        {t('checkout.presaleOnly')}
-                      </p>
-                      <p className="text-xs text-gray-600 mb-3">
-                        {t('checkout.presaleMessage')}
-                      </p>
-                      <p className="text-xs text-gray-700 font-medium">
-                        📍 {t('checkout.visitStore')}: C/ dels Trinitaris, 13, Ciutat Vella, Valencia
-                      </p>
-                    </div>
+                    <button
+                      onClick={() => addToCart({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        image: item.image,
+                        designer: item.artist
+                      })}
+                      className="w-full px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors text-sm tracking-wider"
+                    >
+                      {t('checkout.addToCart')}
+                    </button>
                   </div>
                 </div>
               )}

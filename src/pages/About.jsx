@@ -101,13 +101,16 @@ const About = () => {
                 className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16"
               >
                 <div>
-                  <h3 className="text-xl md:text-2xl tracking-tighter font-light mb-4 md:mb-6">
-                    {t('aboutSection3Title')}
+                  <h2 className="text-2xl md:text-3xl tracking-tighter font-bold mb-3 md:mb-4">
+                    {t('aboutSection3MainTitle')}
+                  </h2>
+                  <h3 className="text-xl md:text-2xl tracking-tighter font-semibold mb-4 md:mb-6">
+                    {t('aboutSection3Subtitle')}
                   </h3>
                   <p className="text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
                     {t('aboutSection3Text1')}
                   </p>
-                  <ul className="text-sm md:text-base leading-relaxed space-y-2">
+                  <ul className="text-sm md:text-base leading-relaxed space-y-2 list-disc pl-5">
                     <li>{t('aboutServices1')}</li>
                     <li>{t('aboutServices2')}</li>
                     <li>{t('aboutServices3')}</li>
