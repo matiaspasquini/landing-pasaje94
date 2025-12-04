@@ -90,6 +90,38 @@ const StripeCheckout = ({ isOpen, onClose, cart, total, shippingCost = 0 }) => {
       // Obtener datos del cliente desde localStorage
       const checkoutData = JSON.parse(localStorage.getItem('checkoutData') || '{}')
       
+      // Guardar datos del pedido para mostrar en la confirmación
+      const orderData = {
+        items: cart.map(item => ({
+          id: item.id,
+          name: item.name,
+          artist: item.artist || item.designer,
+          quantity: item.quantity,
+          price: item.price,
+          image: item.image,
+        })),
+        customerInfo: {
+          firstName: checkoutData.firstName,
+          lastName: checkoutData.lastName,
+          email: checkoutData.email,
+          phone: checkoutData.phone,
+          address: checkoutData.address,
+          city: checkoutData.city,
+          postalCode: checkoutData.postalCode,
+          province: checkoutData.province,
+          country: checkoutData.country,
+        },
+        shippingMethod: checkoutData.shippingMethod || 'standard',
+        shippingCost: shippingCost,
+        subtotal: total - shippingCost,
+        total: total,
+        orderDate: new Date().toISOString(),
+      }
+      
+      // Guardar en ambos storages para mayor seguridad
+      localStorage.setItem('orderData', JSON.stringify(orderData))
+      sessionStorage.setItem('orderData', JSON.stringify(orderData))
+      
       // Llamar a la función de Netlify para crear el PaymentIntent
       const response = await fetch('/.netlify/functions/create-payment-intent', {
         method: 'POST',

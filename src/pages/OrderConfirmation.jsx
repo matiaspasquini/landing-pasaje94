@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { useCart } from '../contexts/CartContext'
 
 const OrderConfirmation = () => {
   const location = useLocation()
+  const { t } = useTranslation()
   const { clearCart } = useCart()
   const [orderData, setOrderData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
