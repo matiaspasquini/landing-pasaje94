@@ -39,6 +39,15 @@ import giovImg2 from '../assets/Giov/Pasaje 94 - Giov studio Candelholder.webp'
 import giovImg3 from '../assets/Giov/Pasaje 94 - Giov studio Fake lamp.JPG'
 import giovImg5 from '../assets/Giov/Pasaje 94 - Giov studio candelholders.webp'
 import giovImg6 from '../assets/Giov/Pasaje 94 - Giov studio objects.JPG'
+import giovImg7 from '../assets/Giov/este.jpeg'
+
+// Importar imágenes de Adriana Cabello
+import adrianaImg1 from '../assets/Adriana Cabello/cantaroN4.jpg'
+import adrianaImg2 from '../assets/Adriana Cabello/vaseGeometrical.png'
+import adrianaImg3 from '../assets/Adriana Cabello/cantaroN1.jpg'
+import adrianaImg4 from '../assets/Adriana Cabello/lamparitaSolapa.JPEG'
+import adrianaImg5 from '../assets/Adriana Cabello/cilindricoVase.jpg'
+import adrianaImg6 from '../assets/Adriana Cabello/cubboVase.jpg'
 
 const Space = () => {
   const containerRef = useRef(null)
@@ -95,7 +104,8 @@ const Space = () => {
     { id: 'bama-intro', name: t('bamaName'), collection: t('bamaCollection'), instagram: '@bamaobjects' },
     { id: 'alberto-intro', name: t('albertoName'), collection: t('albertoCollection'), instagram: '@albertoherrerosoler' },
     { id: 'lod-intro', name: t('lodName'), collection: t('lodCollection'), instagram: '@losobjectosdecoratives' },
-    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection'), instagram: '@giovstudio_' }
+    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection'), instagram: '@giovstudio_' },
+    { id: 'adriana-intro', name: t('adrianaCabelloName'), collection: t('adrianaCabelloCollection'), instagram: '@adriana_cabello' }
   ]
 
   // Crear estructura de productos individuales con intros de diseñadores
@@ -328,6 +338,91 @@ const Space = () => {
       price: 160.00,
       image: giovImg3,
       category: 'lighting'
+    },
+    {
+      id: 'giov-candelabro',
+      type: 'product',
+      name: 'Candelholder',
+      artist: t('giovName'),
+      collection: t('giovCollection'),
+      price: 55.00,
+      category: 'ceramics',
+      variants: [
+        { color: t('colorTerracota'), image: giovImg7, id: 'giov-candelabro-terracota' },
+        { color: t('colorBlanco'), image: giovImg7, id: 'giov-candelabro-blanco' },
+        { color: t('colorEbano'), image: giovImg7, id: 'giov-candelabro-ebano' }
+      ]
+    },
+    
+    // Intro Adriana Cabello
+    {
+      id: 'adriana-intro',
+      type: 'designer-intro',
+      name: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      description: t('adrianaCabelloDescription')
+    },
+    
+    // Productos Adriana Cabello
+    {
+      id: 'adriana-1',
+      type: 'product',
+      name: 'Cantaro n4',
+      artist: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      price: 270.00,
+      image: adrianaImg1,
+      category: 'ceramics'
+    },
+    {
+      id: 'adriana-2',
+      type: 'product',
+      name: 'Vase Geometrical',
+      artist: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      price: 160.00, // small
+      image: adrianaImg2,
+      category: 'ceramics'
+    },
+    {
+      id: 'adriana-3',
+      type: 'product',
+      name: 'Cantaro n1',
+      artist: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      price: 360.00,
+      image: adrianaImg3,
+      category: 'ceramics'
+    },
+    {
+      id: 'adriana-4',
+      type: 'product',
+      name: 'Lamparita Solapa',
+      artist: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      price: 310.00,
+      image: adrianaImg4,
+      category: 'lighting'
+    },
+    {
+      id: 'adriana-5',
+      type: 'product',
+      name: 'Cilindrico Vase',
+      artist: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      price: 230.00,
+      image: adrianaImg5,
+      category: 'ceramics'
+    },
+    {
+      id: 'adriana-6',
+      type: 'product',
+      name: 'Cubbo Vase',
+      artist: t('adrianaCabelloName'),
+      collection: t('adrianaCabelloCollection'),
+      price: 330.00,
+      image: adrianaImg6,
+      category: 'ceramics'
     }
   ]
 
