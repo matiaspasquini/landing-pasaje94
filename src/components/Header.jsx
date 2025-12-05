@@ -119,6 +119,29 @@ const Header = () => {
             94
           </motion.span>
         </motion.div>
+        
+        {/* Scroll Indicator - Solo mobile cuando el menú está abierto */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ delay: 0.3, duration: 0.3 }}
+              className="absolute top-full left-0 right-0 mt-4 flex justify-center md:hidden pointer-events-none"
+            >
+              <div className="text-[10px] uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  →
+                </motion.span>
+                scroll horizontal
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   )

@@ -44,7 +44,7 @@ const Menu = () => {
       </div>
 
       {/* Horizontal Scroll Container */}
-      <div className="flex overflow-x-auto overflow-y-hidden h-screen snap-x snap-mandatory scrollbar-hide">
+      <div className="flex overflow-x-auto h-screen snap-x snap-mandatory scrollbar-hide md:overflow-y-hidden">
         
         {/* Section 1: Introducción */}
         <motion.div
@@ -70,7 +70,7 @@ const Menu = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="min-w-full h-screen flex items-center justify-center px-6 md:px-12 snap-start"
+          className="min-w-full min-h-screen flex items-center justify-center px-6 md:px-12 py-12 md:py-0 snap-start"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 w-full max-w-7xl items-center">
             {/* Imagen principal */}
@@ -78,7 +78,7 @@ const Menu = () => {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="aspect-[4/5] overflow-hidden bg-gray-100"
+              className="w-full max-w-md mx-auto lg:max-w-none aspect-square overflow-hidden bg-gray-100"
             >
               <img
                 src={mainImage}

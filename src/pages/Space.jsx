@@ -372,7 +372,7 @@ const Space = () => {
       {/* Horizontal Scroll Container */}
       <div
         ref={containerRef}
-        className="overflow-x-auto overflow-y-hidden h-full scrollbar-hide pt-20"
+        className="overflow-x-auto h-full scrollbar-hide pt-20 md:overflow-y-hidden"
         style={{ scrollSnapType: 'none' }}
       >
         <div className="flex h-full gap-12 px-6 md:px-12" style={{ width: 'max-content' }}>
@@ -383,7 +383,7 @@ const Space = () => {
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex-shrink-0 flex items-start py-12 md:items-center md:py-0"
+              className="flex-shrink-0 flex items-start py-12 md:items-center md:py-0 overflow-y-auto md:overflow-y-visible"
               style={{ width: '90vw', maxWidth: '1400px' }}
             >
               {item.type === 'intro' ? (
