@@ -126,83 +126,32 @@ const Menu = () => {
           </div>
         </motion.div>
 
-        {/* Section 3: Galería tipo mosaico asimétrico */}
+        {/* Section 3: Galería horizontal de imágenes con scroll */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="min-w-full h-screen flex items-center justify-center px-6 md:px-12 snap-start"
+          className="min-w-full h-screen flex items-center snap-start"
         >
-          <div className="w-full max-w-7xl h-[85vh] grid grid-cols-4 grid-rows-4 gap-3 md:gap-4">
-            {/* Imagen 1 - Grande izquierda */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="col-span-2 row-span-2 overflow-hidden bg-gray-100"
-            >
-              <img
-                src={galleryImages[0]}
-                alt="Café 1"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </motion.div>
-
-            {/* Imagen 2 - Pequeña arriba derecha */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="col-span-2 row-span-1 overflow-hidden bg-gray-100"
-            >
-              <img
-                src={galleryImages[1]}
-                alt="Café 2"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </motion.div>
-
-            {/* Imagen 3 - Media derecha */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="col-span-1 row-span-2 overflow-hidden bg-gray-100"
-            >
-              <img
-                src={galleryImages[2]}
-                alt="Café 3"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </motion.div>
-
-            {/* Imagen 4 - Media derecha abajo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="col-span-1 row-span-2 overflow-hidden bg-gray-100"
-            >
-              <img
-                src={galleryImages[3]}
-                alt="Café 4"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </motion.div>
-
-            {/* Imagen 5 - Grande abajo izquierda */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="col-span-2 row-span-2 overflow-hidden bg-gray-100"
-            >
-              <img
-                src={galleryImages[4]}
-                alt="Café 5"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </motion.div>
+          <div className="w-full h-[80vh] overflow-x-auto overflow-y-hidden scrollbar-hide">
+            <div className="flex h-full gap-4 md:gap-6 px-6 md:px-12" style={{ width: 'max-content' }}>
+              {galleryImages.map((img, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="h-full flex-shrink-0"
+                  style={{ width: 'auto' }}
+                >
+                  <img
+                    src={img}
+                    alt={`Café ${index + 1}`}
+                    className="h-full w-auto object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
