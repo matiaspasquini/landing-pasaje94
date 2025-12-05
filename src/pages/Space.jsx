@@ -370,7 +370,7 @@ const Space = () => {
       name: 'Cantaro n4',
       artist: t('adrianaCabelloName'),
       collection: t('adrianaCabelloCollection'),
-      price: 270.00,
+      price: 560.00,
       image: adrianaImg1,
       category: 'ceramics'
     },
@@ -390,7 +390,7 @@ const Space = () => {
       name: 'Cantaro n1',
       artist: t('adrianaCabelloName'),
       collection: t('adrianaCabelloCollection'),
-      price: 360.00,
+      price: 560.00,
       image: adrianaImg3,
       category: 'ceramics'
     },
