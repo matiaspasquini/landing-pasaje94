@@ -294,7 +294,7 @@ const Space = () => {
       name: 'Vanilla Vase',
       artist: t('lodName'),
       collection: t('lodCollection'),
-      price: 48.00,
+      price: 65.00,
       image: lodImg4,
       category: 'objects'
     },
