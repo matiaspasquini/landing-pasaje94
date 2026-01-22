@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
 import Space from './pages/Space'
+import Shop from './pages/Shop'
 import ProductDetail from './pages/ProductDetail'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -27,6 +28,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/space" element={<Space />} />
+              <Route path="/shop" element={<Shop />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />

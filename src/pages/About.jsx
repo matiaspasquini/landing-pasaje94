@@ -117,6 +117,15 @@ const About = () => {
                     <li>{t('aboutServices4')}</li>
                     <li>{t('aboutServices5')}</li>
                   </ul>
+                  
+                  <div className="mt-8">
+                     <a 
+                      href="#" 
+                      className="inline-block px-8 py-3 border border-black text-black text-sm tracking-widest hover:bg-black hover:text-white transition-colors uppercase"
+                    >
+                      {t('downloadBrochure')}
+                    </a>
+                  </div>
                 </div>
                 
                 <div className="space-y-6 md:space-y-8">

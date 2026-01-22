@@ -13,7 +13,8 @@ const Header = () => {
   const navItems = [
     { name: t('about'), path: '/about' },
     { name: t('projects'), path: '/projects' },
-    { name: t('spaceShop'), path: '/space' },
+    { name: t('shop'), path: '/shop' },
+    { name: t('space'), path: '/space' },
     { name: t('menu'), path: '/menu' },
     { name: t('archive'), path: '/archive' },
   ]
