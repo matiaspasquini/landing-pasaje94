@@ -271,26 +271,6 @@ const Shop = () => {
     
     // Productos Giov
     {
-      id: 'giov-5',
-      type: 'product',
-      name: 'Candleholders Set',
-      artist: t('giovName'),
-      collection: t('giovCollection'),
-      price: 55.00,
-      image: giovImg5,
-      category: 'ceramics'
-    },
-    {
-      id: 'giov-3',
-      type: 'product',
-      name: 'Fake Lamp',
-      artist: t('giovName'),
-      collection: t('giovCollection'),
-      price: 160.00,
-      image: giovImg3,
-      category: 'lighting'
-    },
-    {
       id: 'giov-candelabro',
       type: 'product',
       name: 'Candelholder',
