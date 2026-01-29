@@ -15,7 +15,7 @@ const Header = () => {
     { name: t('projects'), path: '/projects' },
     { name: t('shop'), path: '/shop' },
     { name: t('space'), path: '/space' },
-    { name: t('menu'), path: '/menu' },
+    { name: t('menu'), path: '/cafeteria' },
     { name: t('archive'), path: '/archive' },
   ]
 

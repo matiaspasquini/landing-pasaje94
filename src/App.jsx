@@ -34,7 +34,7 @@ function App() {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/order-confirmation" element={<OrderConfirmation />} />
               <Route path="/archive" element={<Archive />} />
-              <Route path="/menu" element={<Menu />} />
+              <Route path="/cafeteria" element={<Menu />} />
             </Routes>
           </main>
         </div>

@@ -20,12 +20,6 @@ import bamaImg4 from '../assets/BAMA/BULTO 02—Bone—front.jpg'
 import bamaImg5 from '../assets/BAMA/BULTO 02—Bordeaux—side 1.jpg'
 import bamaImg6 from '../assets/BAMA/BULTO 02—Cobalt—side 2.jpg'
 
-// Importar imágenes de Alberto Design
-import albertoImg1 from '../assets/Alberto Design/BRICK 2X1.jpg'
-import albertoImg2 from '../assets/Alberto Design/BRICK 3X1.jpg'
-import albertoImg3 from '../assets/Alberto Design/BRICK 3X2.jpg'
-import albertoImg4 from '../assets/Alberto Design/BRICK 5.jpg'
-
 // Importar imágenes de LOD
 import lodImg1 from '../assets/LOD/Pasaje 94 - LOD - OBJECT.jpg'
 import lodImg2 from '../assets/LOD/Pasaje 94 - LOD - Shell box.jpg'
@@ -102,7 +96,6 @@ const Shop = () => {
   const designers = [
     { id: 'bruno-intro', name: t('brunoMespuletName'), collection: t('brunoMespuletCollection'), instagram: '@brunomespulet' },
     { id: 'bama-intro', name: t('bamaName'), collection: t('bamaCollection'), instagram: '@bamaobjects' },
-    { id: 'alberto-intro', name: t('albertoName'), collection: t('albertoCollection'), instagram: '@albertoherrerosoler' },
     { id: 'lod-intro', name: t('lodName'), collection: t('lodCollection'), instagram: '@losobjectosdecoratives' },
     { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection'), instagram: '@giovstudio_' },
     { id: 'adriana-intro', name: t('adrianaCabelloName'), collection: t('adrianaCabelloCollection'), instagram: '@adriana_cabello' }
@@ -204,47 +197,6 @@ const Shop = () => {
         { color: 'Bordeaux', image: bamaImg5, id: 'bama-5' },
         { color: 'Cobalt', image: bamaImg6, id: 'bama-6' }
       ]
-    },
-    
-    // Intro Alberto Design
-    {
-      id: 'alberto-intro',
-      type: 'designer-intro',
-      name: t('albertoDesignName'),
-      collection: t('albertoDesignCollection'),
-      description: t('albertoDesignDescription')
-    },
-    
-    // Productos Alberto Design
-    {
-      id: 'alberto-1',
-      type: 'product',
-      name: '2x1',
-      artist: t('albertoDesignName'),
-      collection: t('albertoDesignCollection'),
-      price: 80.00,
-      image: albertoImg1,
-      category: 'objects'
-    },
-    {
-      id: 'alberto-2',
-      type: 'product',
-      name: '3x1',
-      artist: t('albertoDesignName'),
-      collection: t('albertoDesignCollection'),
-      price: 120.00,
-      image: albertoImg2,
-      category: 'objects'
-    },
-    {
-      id: 'alberto-3',
-      type: 'product',
-      name: '3x2',
-      artist: t('albertoDesignName'),
-      collection: t('albertoDesignCollection'),
-      price: 200.00,
-      image: albertoImg3,
-      category: 'objects'
     },
     
     // Intro LOD

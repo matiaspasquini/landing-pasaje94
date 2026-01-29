@@ -54,7 +54,7 @@ const Menu = () => {
           className="min-w-full h-screen flex flex-col justify-center items-start px-6 md:px-16 snap-start"
         >
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-8xl tracking-tighter font-light mb-6 md:mb-12 italic leading-none">
+            <h1 className="text-4xl md:text-6xl tracking-tighter font-light mb-6 md:mb-12 italic leading-none">
               {t('menuTitle')}
             </h1>
             <div className="space-y-4 md:space-y-6 text-sm md:text-lg leading-relaxed text-gray-700">
