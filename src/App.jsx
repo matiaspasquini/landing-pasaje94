@@ -13,6 +13,8 @@ import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
 import Archive from './pages/Archive'
 import Menu from './pages/Menu'
+import LegalNotice from './pages/LegalNotice'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
   const location = useLocation()
@@ -35,6 +37,8 @@ function App() {
               <Route path="/order-confirmation" element={<OrderConfirmation />} />
               <Route path="/archive" element={<Archive />} />
               <Route path="/cafeteria" element={<Menu />} />
+              <Route path="/aviso-legal" element={<LegalNotice />} />
+              <Route path="/politica-privacidad" element={<PrivacyPolicy />} />
             </Routes>
           </main>
         </div>

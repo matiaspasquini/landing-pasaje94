@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 // Importar imágenes del slider principal
 import slider1 from '../assets/sliderprincipal/slider1.jpeg'
@@ -106,6 +107,12 @@ const Home = () => {
         style={{ pointerEvents: 'auto' }}
       />
       
+      {/* Enlaces Legales */}
+      <div className="absolute bottom-6 right-6 z-50 flex gap-6 text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#1a1a1a]">
+        <Link to="/aviso-legal" className="hover:opacity-50 transition-opacity">Aviso Legal</Link>
+        <Link to="/politica-privacidad" className="hover:opacity-50 transition-opacity">Política de Privacidad</Link>
+      </div>
+
       {/* Carrusel horizontal de pantalla completa */}
       <div
         ref={scrollContainerRef}
