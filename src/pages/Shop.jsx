@@ -35,14 +35,6 @@ import giovImg5 from '../assets/Giov/Pasaje 94 - Giov studio candelholders.webp'
 import giovImg6 from '../assets/Giov/Pasaje 94 - Giov studio objects.JPG'
 import giovImg7 from '../assets/Giov/este.jpeg'
 
-// Importar imágenes de Adriana Cabello
-import adrianaImg1 from '../assets/Adriana Cabello/cantaroN4.jpg'
-import adrianaImg2 from '../assets/Adriana Cabello/vaseGeometrical.png'
-import adrianaImg3 from '../assets/Adriana Cabello/cantaroN1.jpg'
-import adrianaImg4 from '../assets/Adriana Cabello/lamparitaSolapa.JPEG'
-import adrianaImg5 from '../assets/Adriana Cabello/cilindricoVase.jpg'
-import adrianaImg6 from '../assets/Adriana Cabello/cubboVase.jpg'
-
 const Shop = () => {
   const containerRef = useRef(null)
   const { scrollXProgress } = useScroll({ container: containerRef })
@@ -97,8 +89,7 @@ const Shop = () => {
     { id: 'bruno-intro', name: t('brunoMespuletName'), collection: t('brunoMespuletCollection'), instagram: '@brunomespulet' },
     { id: 'bama-intro', name: t('bamaName'), collection: t('bamaCollection'), instagram: '@bamaobjects' },
     { id: 'lod-intro', name: t('lodName'), collection: t('lodCollection'), instagram: '@losobjectosdecoratives' },
-    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection'), instagram: '@giovstudio_' },
-    { id: 'adriana-intro', name: t('adrianaCabelloName'), collection: t('adrianaCabelloCollection'), instagram: '@adriana_cabello' }
+    { id: 'giov-intro', name: t('giovName'), collection: t('giovCollection'), instagram: '@giovstudio_' }
   ]
 
   // Crear estructura de productos individuales con intros de diseñadores
@@ -285,76 +276,6 @@ const Shop = () => {
       ]
     },
     
-    // Intro Adriana Cabello
-    {
-      id: 'adriana-intro',
-      type: 'designer-intro',
-      name: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      description: t('adrianaCabelloDescription')
-    },
-    
-    // Productos Adriana Cabello
-    {
-      id: 'adriana-1',
-      type: 'product',
-      name: 'Cantaro n4',
-      artist: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      price: 560.00,
-      image: adrianaImg1,
-      category: 'ceramics'
-    },
-    {
-      id: 'adriana-2',
-      type: 'product',
-      name: 'Vase Geometrical',
-      artist: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      price: 160.00, // small
-      image: adrianaImg2,
-      category: 'ceramics'
-    },
-    {
-      id: 'adriana-3',
-      type: 'product',
-      name: 'Cantaro n1',
-      artist: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      price: 560.00,
-      image: adrianaImg3,
-      category: 'ceramics'
-    },
-    {
-      id: 'adriana-4',
-      type: 'product',
-      name: 'Lamparita Solapa',
-      artist: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      price: 310.00,
-      image: adrianaImg4,
-      category: 'lighting'
-    },
-    {
-      id: 'adriana-5',
-      type: 'product',
-      name: 'Cilindrico Vase',
-      artist: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      price: 230.00,
-      image: adrianaImg5,
-      category: 'ceramics'
-    },
-    {
-      id: 'adriana-6',
-      type: 'product',
-      name: 'Cubbo Vase',
-      artist: t('adrianaCabelloName'),
-      collection: t('adrianaCabelloCollection'),
-      price: 330.00,
-      image: adrianaImg6,
-      category: 'ceramics'
-    }
   ]
 
   return (

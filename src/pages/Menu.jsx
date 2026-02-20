@@ -10,10 +10,6 @@ import cafeImg4 from '../assets/Cafe/WhatsApp Imag2025-12-01 at 19.37.41.jpeg'
 import cafeImg5 from '../assets/Cafe/WhatsApp Image 202-12-01 at 19.37.41.jpeg'
 import cafeImg6 from '../assets/Cafe/WhatsAppImage 2025-12-01 at 19.38.48.jpeg'
 
-// Importar logos
-import logoFoc from '../assets/Cafe/Logo - Foc.jpg'
-import logoMolt from '../assets/Cafe/Logo - Molt.jpg'
-
 const Menu = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -87,7 +83,7 @@ const Menu = () => {
               />
             </motion.div>
 
-            {/* Logos y texto */}
+            {/* Texto de proveedores */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -103,21 +99,17 @@ const Menu = () => {
                 </p>
               </div>
 
-              {/* Logo FOC */}
-              <div className="space-y-3">
-                <div className="w-32 md:w-40">
-                  <img src={logoFoc} alt="FOC Coffee" className="w-full h-auto object-contain" />
-                </div>
+              {/* FOC */}
+              <div className="space-y-2">
+                <h3 className="text-2xl md:text-3xl font-light tracking-tight">FOC Coffee</h3>
                 <p className="text-sm md:text-base text-gray-600">
                   {t('focDescription', 'Café de especialidad')}
                 </p>
               </div>
 
-              {/* Logo MOLT */}
-              <div className="space-y-3">
-                <div className="w-32 md:w-40">
-                  <img src={logoMolt} alt="MOLT" className="w-full h-auto object-contain" />
-                </div>
+              {/* MOLT */}
+              <div className="space-y-2">
+                <h3 className="text-2xl md:text-3xl font-light tracking-tight">MOLT</h3>
                 <p className="text-sm md:text-base text-gray-600">
                   {t('moltDescription', 'Productos artesanales')}
                 </p>

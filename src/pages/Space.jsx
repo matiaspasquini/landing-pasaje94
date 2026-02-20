@@ -1,16 +1,14 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../contexts/CartContext'
 
-// Importar imágenes de Cowork
-import cowork1 from '../assets/COWORK/IMG_0374.webp'
-import cowork2 from '../assets/COWORK/IMG_0683.webp'
-import cowork3 from '../assets/COWORK/744484FD-ADE1-44C0-AF5D-8DC594F8055D.JPEG'
-import cowork4 from '../assets/COWORK/D4029253-DC86-4946-A871-2A01DDFE66E2.JPEG'
+// Importar imágenes de Nuevo Space (Permanent Souls)
+import iranzoImg1 from '../assets/Nuevo Space/WhatsApp Image 2026-02-17 at 13.46.19.jpeg'
+import iranzoImg2 from '../assets/Nuevo Space/2.jpeg'
 
-const CoworkGallery = ({ images }) => {
+const SpaceGallery = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const next = (e) => {
@@ -38,29 +36,35 @@ const CoworkGallery = ({ images }) => {
       </AnimatePresence>
       
       {/* Invisible Navigation Areas */}
-      <div className="absolute inset-0 flex z-20">
-        <div 
-          onClick={prev} 
-          className="w-1/2 h-full cursor-w-resize md:cursor-none"
-        />
-        <div 
-          onClick={next} 
-          className="w-1/2 h-full cursor-e-resize md:cursor-none"
-        />
-      </div>
+      {images.length > 1 && (
+        <div className="absolute inset-0 flex z-20">
+          <div 
+            onClick={prev} 
+            className="w-1/2 h-full cursor-w-resize md:cursor-none"
+          />
+          <div 
+            onClick={next} 
+            className="w-1/2 h-full cursor-e-resize md:cursor-none"
+          />
+        </div>
+      )}
 
       {/* Styled Navigation Arrows (Visible only on desktop hover) */}
-      <div className="absolute inset-0 pointer-events-none hidden md:flex items-center justify-between px-8 text-black/20 group-hover:text-black/60 transition-colors duration-500">
-         <span className="text-4xl font-light">←</span>
-         <span className="text-4xl font-light">→</span>
-      </div>
+      {images.length > 1 && (
+        <div className="absolute inset-0 pointer-events-none hidden md:flex items-center justify-between px-8 text-black/20 group-hover:text-black/60 transition-colors duration-500">
+           <span className="text-4xl font-light">←</span>
+           <span className="text-4xl font-light">→</span>
+        </div>
+      )}
 
       {/* Modern Counter */}
-      <div className="absolute bottom-6 left-6 md:left-auto md:right-6 font-mono text-xs tracking-widest text-gray-500">
-        <span className="text-black">{(currentIndex + 1).toString().padStart(2, '0')}</span>
-        <span className="mx-2">/</span>
-        <span>{images.length.toString().padStart(2, '0')}</span>
-      </div>
+      {images.length > 1 && (
+        <div className="absolute bottom-6 left-6 md:left-auto md:right-6 font-mono text-xs tracking-widest text-gray-500">
+          <span className="text-black">{(currentIndex + 1).toString().padStart(2, '0')}</span>
+          <span className="mx-2">/</span>
+          <span>{images.length.toString().padStart(2, '0')}</span>
+        </div>
+      )}
     </div>
   )
 }
@@ -68,7 +72,7 @@ const CoworkGallery = ({ images }) => {
 const Space = () => {
   const { t } = useTranslation()
   const { getCartCount, setIsCartOpen } = useCart()
-  const coworkImages = [cowork1, cowork2, cowork3, cowork4]
+  const spaceImages = [iranzoImg1, iranzoImg2]
 
   return (
     <div className="h-screen overflow-hidden bg-white selection:bg-black selection:text-white">
@@ -120,42 +124,35 @@ const Space = () => {
              className="max-w-xl mx-auto md:mx-0"
             >
               <div className="flex items-center gap-4 mb-6 font-mono text-xs tracking-widest text-gray-500 uppercase">
-                  <span>SEASON 01</span>
+                  <span>SEASON 02</span>
                   <div className="h-px w-8 bg-gray-300"></div>
-                  <span>Jan — Feb</span>
+                  <span>Feb — Mar</span>
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif italic mb-2 leading-[0.9] -ml-1">
-                {t('coworkingTitle')}
+                {t('permanentSoulsTitle')}
               </h1>
               
               <p className="font-mono text-xs tracking-widest mb-8 text-black border-l border-black pl-4 py-1 mt-6">
-                {t('coworkingDates')}
+                Iranzo — Jordi Iranzo
               </p>
 
               <h2 className="text-xl md:text-2xl font-light mb-6 leading-tight">
-                {t('coworkingSubtitle')}
+                {t('permanentSoulsSubtitle')}
               </h2>
 
               <div className="space-y-6 text-sm md:text-base leading-relaxed text-gray-600 font-sans tracking-wide text-justify md:text-left">
-                <p>{t('coworkingText1')}</p>
-                <p>{t('coworkingText2')}</p>
-              </div>
-
-               <div className="mt-12">
-                <a 
-                  href="#" // Link to PDF or page
-                  className="font-mono text-xs uppercase tracking-widest border-b border-black pb-1 hover:opacity-50 transition-opacity"
-                >
-                   ↓ {t('downloadBrochure')}
-                </a>
+                <p>{t('permanentSoulsText1')}</p>
+                <p>{t('permanentSoulsText2')}</p>
+                <p>{t('permanentSoulsText3')}</p>
+                <p>{t('permanentSoulsText4')}</p>
               </div>
             </motion.div>
         </div>
 
         {/* Image Gallery Column */}
         <div className="w-full md:w-[60%] h-[50vh] md:h-full bg-white flex items-center justify-center p-4 md:p-12 md:pl-0">
-             <CoworkGallery images={coworkImages} />
+             <SpaceGallery images={spaceImages} />
         </div>
       </div>
     </div>

@@ -11,6 +11,18 @@ const Archive = () => {
   // Estructura de artistas del archivo
   const artists = [
     {
+      id: 'christmas-market',
+      name: 'Holy Days',
+      subtitle: 'Christmas Market 2025',
+      description: t('christmasMarketDescription')
+    },
+    {
+      id: 'coworking-archive',
+      name: 'Coworking',
+      subtitle: t('coworkingSubtitle'),
+      description: t('coworkingArchiveDescription')
+    },
+    {
       id: 'angel-tausia',
       name: 'Angel Tausia Objects',
       description: t('angelTausiaDescription')
